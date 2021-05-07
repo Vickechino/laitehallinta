@@ -1,0 +1,401 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LaitehallintaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Loans">
+          <Key>
+            <PropertyRef Name="loan_id" />
+          </Key>
+          <Property Name="loan_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="location_id" Type="int" />
+          <Property Name="product_id" Type="int" />
+          <Property Name="loaned_date" Type="datetime" />
+          <Property Name="spec_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="location_id" />
+          </Key>
+          <Property Name="location_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="location_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="location_row2" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Productgroup">
+          <Key>
+            <PropertyRef Name="product_group_id" />
+          </Key>
+          <Property Name="product_group_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="product_group_name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="barcode" Type="int" />
+          <Property Name="product_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="product_row2" Type="nvarchar" MaxLength="100" />
+          <Property Name="product_group_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Specifications">
+          <Key>
+            <PropertyRef Name="spec_id" />
+          </Key>
+          <Property Name="spec_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="loan_spec" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+          <Property Name="password" Type="nvarchar" MaxLength="128" />
+          <Property Name="lastseen" Type="datetime" />
+          <Property Name="admin" Type="nvarchar" MaxLength="1" />
+          <Property Name="userName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="30" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="40" />
+        </EntityType>
+        <Association Name="FK__Loans__location___440B1D61">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="0..1" />
+          <End Role="Loans" Type="Self.Loans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="location_id" />
+            </Principal>
+            <Dependent Role="Loans">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Loans__product_i__4316F928">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Loans" Type="Self.Loans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="Loans">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Loans__spec_id__44FF419A">
+          <End Role="Specifications" Type="Self.Specifications" Multiplicity="0..1" />
+          <End Role="Loans" Type="Self.Loans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specifications">
+              <PropertyRef Name="spec_id" />
+            </Principal>
+            <Dependent Role="Loans">
+              <PropertyRef Name="spec_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Loans__user_id__4222D4EF">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Loans" Type="Self.Loans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Loans">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Products__produc__3B75D760">
+          <End Role="Productgroup" Type="Self.Productgroup" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productgroup">
+              <PropertyRef Name="product_group_id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="product_group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LaitehallintaModelStoreContainer">
+          <EntitySet Name="Loans" EntityType="Self.Loans" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Productgroup" EntityType="Self.Productgroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Specifications" EntityType="Self.Specifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Loans__location___440B1D61" Association="Self.FK__Loans__location___440B1D61">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Loans" EntitySet="Loans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Loans__product_i__4316F928" Association="Self.FK__Loans__product_i__4316F928">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Loans" EntitySet="Loans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Loans__spec_id__44FF419A" Association="Self.FK__Loans__spec_id__44FF419A">
+            <End Role="Specifications" EntitySet="Specifications" />
+            <End Role="Loans" EntitySet="Loans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Loans__user_id__4222D4EF" Association="Self.FK__Loans__user_id__4222D4EF">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Loans" EntitySet="Loans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Products__produc__3B75D760" Association="Self.FK__Products__produc__3B75D760">
+            <End Role="Productgroup" EntitySet="Productgroup" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LaitehallintaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Loan">
+          <Key>
+            <PropertyRef Name="loan_id" />
+          </Key>
+          <Property Name="loan_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="location_id" Type="Int32" />
+          <Property Name="product_id" Type="Int32" />
+          <Property Name="loaned_date" Type="DateTime" Precision="3" />
+          <Property Name="spec_id" Type="Int32" />
+          <NavigationProperty Name="Location" Relationship="Self.FK__Loans__location___440B1D61" FromRole="Loans" ToRole="Locations" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Loans__product_i__4316F928" FromRole="Loans" ToRole="Products" />
+          <NavigationProperty Name="Specification" Relationship="Self.FK__Loans__spec_id__44FF419A" FromRole="Loans" ToRole="Specifications" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Loans__user_id__4222D4EF" FromRole="Loans" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="location_id" />
+          </Key>
+          <Property Name="location_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="location_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="location_row2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Loans" Relationship="Self.FK__Loans__location___440B1D61" FromRole="Locations" ToRole="Loans" />
+        </EntityType>
+        <EntityType Name="Productgroup">
+          <Key>
+            <PropertyRef Name="product_group_id" />
+          </Key>
+          <Property Name="product_group_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_group_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Products__produc__3B75D760" FromRole="Productgroup" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="barcode" Type="Int32" />
+          <Property Name="product_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="product_row2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="product_group_id" Type="Int32" />
+          <NavigationProperty Name="Loans" Relationship="Self.FK__Loans__product_i__4316F928" FromRole="Products" ToRole="Loans" />
+          <NavigationProperty Name="Productgroup" Relationship="Self.FK__Products__produc__3B75D760" FromRole="Products" ToRole="Productgroup" />
+        </EntityType>
+        <EntityType Name="Specification">
+          <Key>
+            <PropertyRef Name="spec_id" />
+          </Key>
+          <Property Name="spec_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="loan_spec" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Loans" Relationship="Self.FK__Loans__spec_id__44FF419A" FromRole="Specifications" ToRole="Loans" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="lastseen" Type="DateTime" Precision="3" />
+          <Property Name="admin" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Loans" Relationship="Self.FK__Loans__user_id__4222D4EF" FromRole="Users" ToRole="Loans" />
+          <Property Name="userName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="firstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__Loans__location___440B1D61">
+          <End Role="Locations" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Loans" Type="Self.Loan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="location_id" />
+            </Principal>
+            <Dependent Role="Loans">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Loans__product_i__4316F928">
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Loans" Type="Self.Loan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="Loans">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Loans__spec_id__44FF419A">
+          <End Role="Specifications" Type="Self.Specification" Multiplicity="0..1" />
+          <End Role="Loans" Type="Self.Loan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specifications">
+              <PropertyRef Name="spec_id" />
+            </Principal>
+            <Dependent Role="Loans">
+              <PropertyRef Name="spec_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Loans__user_id__4222D4EF">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Loans" Type="Self.Loan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Loans">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Products__produc__3B75D760">
+          <End Role="Productgroup" Type="Self.Productgroup" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productgroup">
+              <PropertyRef Name="product_group_id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="product_group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LaitehallintaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Loans" EntityType="Self.Loan" />
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="Productgroups" EntityType="Self.Productgroup" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Specifications" EntityType="Self.Specification" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Loans__location___440B1D61" Association="Self.FK__Loans__location___440B1D61">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Loans" EntitySet="Loans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Loans__product_i__4316F928" Association="Self.FK__Loans__product_i__4316F928">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Loans" EntitySet="Loans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Loans__spec_id__44FF419A" Association="Self.FK__Loans__spec_id__44FF419A">
+            <End Role="Specifications" EntitySet="Specifications" />
+            <End Role="Loans" EntitySet="Loans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Loans__user_id__4222D4EF" Association="Self.FK__Loans__user_id__4222D4EF">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Loans" EntitySet="Loans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Products__produc__3B75D760" Association="Self.FK__Products__produc__3B75D760">
+            <End Role="Productgroup" EntitySet="Productgroups" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LaitehallintaModelStoreContainer" CdmEntityContainer="LaitehallintaEntities">
+          <EntitySetMapping Name="Loans">
+            <EntityTypeMapping TypeName="LaitehallintaModel.Loan">
+              <MappingFragment StoreEntitySet="Loans">
+                <ScalarProperty Name="loan_id" ColumnName="loan_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="loaned_date" ColumnName="loaned_date" />
+                <ScalarProperty Name="spec_id" ColumnName="spec_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="LaitehallintaModel.Location">
+              <MappingFragment StoreEntitySet="Locations">
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="location_name" ColumnName="location_name" />
+                <ScalarProperty Name="location_row2" ColumnName="location_row2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productgroups">
+            <EntityTypeMapping TypeName="LaitehallintaModel.Productgroup">
+              <MappingFragment StoreEntitySet="Productgroup">
+                <ScalarProperty Name="product_group_id" ColumnName="product_group_id" />
+                <ScalarProperty Name="product_group_name" ColumnName="product_group_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="LaitehallintaModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="barcode" ColumnName="barcode" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="product_row2" ColumnName="product_row2" />
+                <ScalarProperty Name="product_group_id" ColumnName="product_group_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Specifications">
+            <EntityTypeMapping TypeName="LaitehallintaModel.Specification">
+              <MappingFragment StoreEntitySet="Specifications">
+                <ScalarProperty Name="spec_id" ColumnName="spec_id" />
+                <ScalarProperty Name="loan_spec" ColumnName="loan_spec" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="LaitehallintaModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="lastseen" ColumnName="lastseen" />
+                <ScalarProperty Name="admin" ColumnName="admin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

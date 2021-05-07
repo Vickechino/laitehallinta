@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Your ASP.NET Application</title>
+    <title>@ViewBag.Title - Tuoterekisteri ASP.NET App</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -13,16 +13,32 @@
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span><
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Tuoterekisteri", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Products", "Index", "Products")</li>
+                    @if (Session["UserName"] == null)
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "Users")</li>
+                    }
+                    else
+                    {
+                        if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+                        {
+                            <li>@Html.ActionLink("User management", "Index", "Users")</li>
+                        }
+                        else { }
+                        <li>@Html.ActionLink("Logout", "Logout", "Users")</li>
+
+                    }
+
+
+
                 </ul>
             </div>
         </div>
@@ -31,7 +47,14 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>
+                @if (Session["UserName"] != null)
+                { ViewBag.LoggedStatus = "in"; }
+                else if (Session["UserName"] == null) { ViewBag.LoggedStatus = "out"; }
+                You are logged: @ViewBag.Loggedstatus
+
+            </p>
+            <p>&copy; @DateTime.Now.Year - 1337 ASP.NET Applikaatio</p>
         </footer>
     </div>
 
