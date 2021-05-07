@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -117,6 +118,41 @@ namespace Tuoterekisteri.Controllers
 
             }
             else return RedirectToAction("Index");
+        }
+        public ActionResult Edit(int? id)
+        {
+            if (id == null) { return RedirectToAction("Index"); }
+            if (Session["UserName"] == null) return RedirectToAction("Login", "Home");
+            User user = db.Users.Find(id);
+            if (user == null) RedirectToAction("Index", "Home");
+            //ViewBag.RegionID = new SelectList(db.Region, "RegionID", "RegionDescription", X.RegionID);
+            if (Session["UserName"] != null && Session["Permission"].ToString() == "1")  
+            { 
+                return View(user); 
+            }
+            else return RedirectToAction("Index");
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken] //Katso https://go.microsoft.com/fwlink/?LinkId=317598
+        public ActionResult Edit([Bind(Include = "userName, password, email, firstName, lastName, admin, user_id")] User user)
+        {
+            if (ModelState.IsValid && (Session["UserName"] != null))
+            {
+                    try
+                    {
+                        db.Entry(user).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    catch
+                    {
+                        ViewBag.CreateUserError = "Error saving, Username taken?";
+                        return View();
+                    }
+
+            }
+            return View(User);
         }
     }
 }
