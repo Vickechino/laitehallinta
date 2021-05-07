@@ -56,7 +56,7 @@ namespace Tuoterekisteri.Controllers
         }
         public ActionResult Create()
         {
-            if (Session["UserName"] != null)
+            if (Session["UserName"] != null && Session["Permission"].ToString() == "1")
             {
                 return View();
             }
@@ -66,7 +66,7 @@ namespace Tuoterekisteri.Controllers
         [HttpPost]
         public ActionResult Create([Bind(Include = "userName, password, email, firstName, lastName, admin")] User newUser)
         {
-            if (ModelState.IsValid && Session["UserName"] != null)
+            if (ModelState.IsValid && Session["UserName"] != null && Session["Permission"].ToString() == "1")
             {
                 try
                 {
