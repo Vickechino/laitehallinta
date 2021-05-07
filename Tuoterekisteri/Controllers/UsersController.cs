@@ -88,7 +88,7 @@ namespace Tuoterekisteri.Controllers
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             User user = db.Users.Find(id);
             if (user == null) return RedirectToAction("Index", "Home");
-            if (Session["UserName"] != null)
+            if (Session["UserName"] != null && Session["Permission"].ToString() == "1")
             {
                 return View(user);
             }
@@ -122,15 +122,24 @@ namespace Tuoterekisteri.Controllers
         public ActionResult Edit(int? id)
         {
             if (id == null) { return RedirectToAction("Index"); }
-            if (Session["UserName"] == null) return RedirectToAction("Login", "Home");
-            User user = db.Users.Find(id);
-            if (user == null) RedirectToAction("Index", "Home");
-            //ViewBag.RegionID = new SelectList(db.Region, "RegionID", "RegionDescription", X.RegionID);
-            if (Session["UserName"] != null && Session["Permission"].ToString() == "1")  
-            { 
-                return View(user); 
+            try
+            {
+                if (Session["UserName"] == null) return RedirectToAction("Login", "Home");
+                User user = db.Users.Find(id);
+                if (user == null) RedirectToAction("Index", "Home");
+                //ViewBag.RegionID = new SelectList(db.Region, "RegionID", "RegionDescription", X.RegionID);
+                if (Session["UserName"] != null && Session["Permission"].ToString() == "1")
+                {
+                    return View(user);
+                }
+                else return RedirectToAction("Index");
             }
-            else return RedirectToAction("Index");
+            catch (Exception)
+            {
+                return RedirectToAction("Index");
+            }
+            finally { db.Dispose(); }
+            
 
         }
         [HttpPost]
