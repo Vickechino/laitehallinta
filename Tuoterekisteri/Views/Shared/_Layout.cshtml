@@ -24,7 +24,7 @@
                     <li>@Html.ActionLink("Products", "Index", "Products")</li>
                     @if (Session["UserName"] == null)
                     {
-                        <li>@Html.ActionLink(Text.txt[1, Lang.lang].ToString(), "Login", "Users")</li>
+                        <li>@Html.ActionLink(Text.txt[1, Lang.lang], "Login", "Users")</li>
                     }
                     else
                     {
