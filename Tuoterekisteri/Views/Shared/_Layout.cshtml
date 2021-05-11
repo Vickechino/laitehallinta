@@ -30,10 +30,10 @@
                     {
                         if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
                         {
-                            <li>@Html.ActionLink("User management", "Index", "Users")</li>
+                            <li>@Html.ActionLink(Text.txt[9, Lang.lang], "Index", "Users")</li>
                         }
                         else { }
-                        <li>@Html.ActionLink("Logout", "Logout", "Users")</li>
+                        <li>@Html.ActionLink(Text.txt[7, Lang.lang], "Logout", "Users")</li>
 
                     }
 
