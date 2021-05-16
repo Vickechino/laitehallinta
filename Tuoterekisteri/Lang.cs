@@ -5,13 +5,11 @@ using System.Web;
 
 namespace Tuoterekisteri
 {
-    public class Lang
+
+    public class L
     {
-        public static int lang = 1; // Setting initial language
+        public static int nr = 1; // Setting initial language
+
     }
+
 }
-
-// 0 = ENG
-// 1 = FIN
-// 2 = SWE
-

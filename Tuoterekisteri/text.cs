@@ -5,21 +5,26 @@ using System.Web;
 
 namespace Tuoterekisteri
 {
-	public class Text
-	{
-		public static string[,] txt = {
+public class T
+{
+public static string[,] txt =
+{
 
-	{"Menu", "Valikko", "Meny" }, // 0
-	{"Login", "Kirjaudu", "Logga in" }, // 1
-	{"Username", "Käyttäjänimi", "Användarnamn" }, // 2
-	{"Password", "Salasana", "Lösenord" }, // 3
-	{"Firstname", "Etunimi", "Förnamn" }, // 4
-	{"Lastname", "Sukunimi", "Efternamn" }, // 5
-	{"Email", "Sähköposti", "e-postaddress" }, // 6
-	{"Log out", "Kirjaudu ulos", "Logga ut" }, // 7
-	{"Create", "Luo", "Skapa" }, // 8
-	{"User Management", "Käyttäjienhallinta", "Användarhantering" }, // 9
+{"ENG", "FIN", "SWE" }, // 0
+{"Login", "Kirjaudu", "Logga in" }, // 1
+{"Username", "Käyttäjänimi", "Användarnamn" }, // 2
+{"Error", "Virhe","Fel"}, // 3
+{"Password", "Salasana", "Lösenord" }, // 4
+{"Menu", "Valikko", "Meny" }, // 5
+{"Logout", "Kirjaudu ulos", "Logga ut"}, // 6
+{"Products", "Tuotteet", "Produkter"}, // 7
+{"An error occurred.", "Tapahtui virhe", "Ett fel uppstod"}, // 8
+{"Create", "Lisää", "Lägg till"}, // 9
+{"Delete", "Poista", "Radera"}, // 10
+{"Edit", "Muuta", "Ändra"}, // 11
 
 
+};
+}
+}
 
-};}}

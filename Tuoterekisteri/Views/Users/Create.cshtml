@@ -1,7 +1,7 @@
 ﻿@model Tuoterekisteri.Models.User
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = T.txt[9, L.nr];
 }
 
 <h2>Create</h2>
@@ -15,7 +15,7 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.Label(Text.txt[2, Lang.lang], htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label(T.txt[2, L.nr], htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger" })
@@ -23,7 +23,7 @@
     </div>
 
     <div class="form-group">
-        @Html.Label(Text.txt[3, Lang.lang], htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label(T.txt[4, L.nr], htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
@@ -31,7 +31,7 @@
     </div>
 
     <div class="form-group">
-        @Html.Label(Text.txt[6, Lang.lang], htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label(T.txt[6, L.nr], htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
@@ -39,14 +39,14 @@
     </div>
 
     <div class="form-group">
-        @Html.Label(Text.txt[4, Lang.lang], htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label(T.txt[4, L.nr], htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.firstName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.firstName, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-group">
-        @Html.Label(Text.txt[5, Lang.lang], htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label(T.txt[5, L.nr], htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.lastName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.lastName, "", new { @class = "text-danger" })
@@ -66,7 +66,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit"  value="@Text.txt[8, Lang.lang]" class="btn btn-default" />
+            <input type="submit"  value="@T.txt[8, L.nr]" class="btn btn-default" />
         </div>
     </div>
 </div>

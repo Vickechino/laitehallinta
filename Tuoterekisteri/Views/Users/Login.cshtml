@@ -1,10 +1,10 @@
 ﻿@model Tuoterekisteri.Models.User
 
 @{
-    ViewBag.Title = Text.txt[1, Lang.lang];
+    ViewBag.Title = T.txt[1, L.nr];
 }
 
-<h2>@Text.txt[1, Lang.lang]</h2>
+<h2>@T.txt[1, L.nr]</h2>
 
 @using (Html.BeginForm("Authorize", "Users", FormMethod.Post))
 {
@@ -15,16 +15,16 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.user_id)
         <div class="form-group">
-            @Html.Label(Text.txt[2, Lang.lang], htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label(T.txt[2, L.nr], htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "form-control", placeholder = Text.txt[2, Lang.lang]} })
+                @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "form-control", placeholder = T.txt[2, L.nr]} })
                 @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            @Html.Label(Text.txt[3, Lang.lang], htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label(T.txt[4, L.nr], htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", placeholder = Text.txt[3, Lang.lang], Type = "password" } })
+                @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", placeholder = T.txt[4, L.nr], Type = "password" } })
                 @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -35,7 +35,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="@Text.txt[1, Lang.lang]" class="btn btn-default" />
+                <input type="submit" value="@T.txt[1, L.nr]" class="btn btn-default" />
             </div>
         </div>
     </div>

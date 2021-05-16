@@ -13,18 +13,30 @@ namespace Tuoterekisteri.Controllers
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Our application description page.";
 
+        public ActionResult ENG()
+        {
+
+            L.nr = 0;
             return View();
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Our contact page.";
 
+        public ActionResult FIN()
+        {
+
+            L.nr = 1;
             return View();
         }
+
+
+        public ActionResult SWE()
+        {
+
+            L.nr = 2;
+            return View();
+        }
+
+
     }
 }
