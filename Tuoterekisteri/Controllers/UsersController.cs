@@ -25,18 +25,18 @@ namespace Tuoterekisteri.Controllers
         }
         public ActionResult Login()
         {
-            if (Session["userName"] != null) { return RedirectToAction("Index", "Home"); }
+            if (Session["username"] != null) { return RedirectToAction("Index", "Home"); }
             else return View();
         }
         [HttpPost]
         public ActionResult Authorize(User LoginModel)
         {
-            var LoggedUser = db.Users.SingleOrDefault(x => x.userName == LoginModel.userName && x.password == LoginModel.password);
+            var LoggedUser = db.Users.SingleOrDefault(x => x.username == LoginModel.username && x.password == LoginModel.password);
             if (LoggedUser != null)
             {
                 ViewBag.LoginMessage = "Successful login";
                 ViewBag.Loggedstatus = "In";
-                Session["UserName"] = LoggedUser.userName;
+                Session["UserName"] = LoggedUser.username;
                 Session["Permission"] = LoggedUser.admin;
                 return RedirectToAction("Index", "Home");
             }
@@ -64,7 +64,7 @@ namespace Tuoterekisteri.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create([Bind(Include = "userName, password, email, firstName, lastName, admin")] User newUser)
+        public ActionResult Create([Bind(Include = "username, password, email, firstName, lastName, admin")] User newUser)
         {
             if (ModelState.IsValid && Session["UserName"] != null && Session["Permission"].ToString() == "1")
             {
@@ -107,7 +107,7 @@ namespace Tuoterekisteri.Controllers
 
                     db.Users.Remove(user);
                     db.SaveChanges();
-                    if (Session["UserName"].ToString().ToLower() == user.userName.ToString().ToLower()) { return RedirectToAction("Logout", "Users"); } //Should consider removing some casts
+                    if (Session["UserName"].ToString().ToLower() == user.username.ToString().ToLower()) { return RedirectToAction("Logout", "Users"); } //Should consider removing some casts
                     return RedirectToAction("Index");
                 }
                 catch
@@ -144,7 +144,7 @@ namespace Tuoterekisteri.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken] //Katso https://go.microsoft.com/fwlink/?LinkId=317598
-        public ActionResult Edit([Bind(Include = "userName, password, email, firstName, lastName, admin, user_id")] User user)
+        public ActionResult Edit([Bind(Include = "username, password, email, firstName, lastName, admin, user_id")] User user)
         {
             if (ModelState.IsValid && (Session["UserName"] != null))
             {

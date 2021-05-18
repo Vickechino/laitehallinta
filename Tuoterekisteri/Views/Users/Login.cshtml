@@ -17,8 +17,8 @@
         <div class="form-group">
             @Html.Label(T.txt[2, L.nr], htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "form-control", placeholder = T.txt[2, L.nr]} })
-                @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control", placeholder = T.txt[2, L.nr]} })
+                @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
