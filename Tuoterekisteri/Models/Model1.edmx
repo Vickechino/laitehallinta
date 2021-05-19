@@ -15,6 +15,7 @@
           <Property Name="product_id" Type="int" />
           <Property Name="loaned_date" Type="datetime" />
           <Property Name="spec_id" Type="int" />
+          <Property Name="status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Locations">
           <Key>
@@ -53,15 +54,15 @@
             <PropertyRef Name="user_id" />
           </Key>
           <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="100" />
           <Property Name="email" Type="nvarchar" MaxLength="100" />
           <Property Name="password" Type="nvarchar" MaxLength="128" />
           <Property Name="lastSeen" Type="datetime" />
           <Property Name="admin" Type="nvarchar" MaxLength="1" />
-          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="firstName" Type="nvarchar" MaxLength="30" />
-          <Property Name="lastName" Type="nvarchar" MaxLength="40" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="100" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <Association Name="FK__Loans__location___440B1D61">
+        <Association Name="FK__Loans__location___693CA210">
           <End Role="Locations" Type="Self.Locations" Multiplicity="0..1" />
           <End Role="Loans" Type="Self.Loans" Multiplicity="*" />
           <ReferentialConstraint>
@@ -73,7 +74,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Loans__product_i__4316F928">
+        <Association Name="FK__Loans__product_i__68487DD7">
           <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
           <End Role="Loans" Type="Self.Loans" Multiplicity="*" />
           <ReferentialConstraint>
@@ -85,7 +86,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Loans__spec_id__44FF419A">
+        <Association Name="FK__Loans__spec_id__6A30C649">
           <End Role="Specifications" Type="Self.Specifications" Multiplicity="0..1" />
           <End Role="Loans" Type="Self.Loans" Multiplicity="*" />
           <ReferentialConstraint>
@@ -97,7 +98,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Loans__user_id__4222D4EF">
+        <Association Name="FK__Loans__user_id__6754599E">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Loans" Type="Self.Loans" Multiplicity="*" />
           <ReferentialConstraint>
@@ -109,7 +110,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Products__produc__3B75D760">
+        <Association Name="FK__Products__produc__60A75C0F">
           <End Role="Productgroup" Type="Self.Productgroup" Multiplicity="0..1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
@@ -128,23 +129,23 @@
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Specifications" EntityType="Self.Specifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Loans__location___440B1D61" Association="Self.FK__Loans__location___440B1D61">
+          <AssociationSet Name="FK__Loans__location___693CA210" Association="Self.FK__Loans__location___693CA210">
             <End Role="Locations" EntitySet="Locations" />
             <End Role="Loans" EntitySet="Loans" />
           </AssociationSet>
-          <AssociationSet Name="FK__Loans__product_i__4316F928" Association="Self.FK__Loans__product_i__4316F928">
+          <AssociationSet Name="FK__Loans__product_i__68487DD7" Association="Self.FK__Loans__product_i__68487DD7">
             <End Role="Products" EntitySet="Products" />
             <End Role="Loans" EntitySet="Loans" />
           </AssociationSet>
-          <AssociationSet Name="FK__Loans__spec_id__44FF419A" Association="Self.FK__Loans__spec_id__44FF419A">
+          <AssociationSet Name="FK__Loans__spec_id__6A30C649" Association="Self.FK__Loans__spec_id__6A30C649">
             <End Role="Specifications" EntitySet="Specifications" />
             <End Role="Loans" EntitySet="Loans" />
           </AssociationSet>
-          <AssociationSet Name="FK__Loans__user_id__4222D4EF" Association="Self.FK__Loans__user_id__4222D4EF">
+          <AssociationSet Name="FK__Loans__user_id__6754599E" Association="Self.FK__Loans__user_id__6754599E">
             <End Role="Users" EntitySet="Users" />
             <End Role="Loans" EntitySet="Loans" />
           </AssociationSet>
-          <AssociationSet Name="FK__Products__produc__3B75D760" Association="Self.FK__Products__produc__3B75D760">
+          <AssociationSet Name="FK__Products__produc__60A75C0F" Association="Self.FK__Products__produc__60A75C0F">
             <End Role="Productgroup" EntitySet="Productgroup" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
@@ -167,6 +168,7 @@
           <NavigationProperty Name="Product" Relationship="Self.FK__Loans__product_i__4316F928" FromRole="Loans" ToRole="Products" />
           <NavigationProperty Name="Specification" Relationship="Self.FK__Loans__spec_id__44FF419A" FromRole="Loans" ToRole="Specifications" />
           <NavigationProperty Name="User" Relationship="Self.FK__Loans__user_id__4222D4EF" FromRole="Loans" ToRole="Users" />
+          <Property Name="status" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -215,9 +217,9 @@
           <Property Name="lastSeen" Type="DateTime" Precision="3" />
           <Property Name="admin" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Loans" Relationship="Self.FK__Loans__user_id__4222D4EF" FromRole="Users" ToRole="Loans" />
-          <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="firstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="lastName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="firstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK__Loans__location___440B1D61">
           <End Role="Locations" Type="Self.Location" Multiplicity="0..1" />
@@ -316,6 +318,7 @@
           <EntitySetMapping Name="Loans">
             <EntityTypeMapping TypeName="LaitehallintaModel.Loan">
               <MappingFragment StoreEntitySet="Loans">
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="loan_id" ColumnName="loan_id" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="location_id" ColumnName="location_id" />
