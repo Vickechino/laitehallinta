@@ -39,9 +39,14 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">@(T.txt[0, L.nr])</a>
                         <div class="dropdown-menu" style="">
-                            <a class="dropdown-item" @Html.ActionLink("ENG", "ENG", "Home") </a>
-                            <a class="dropdown-item" @Html.ActionLink("FIN", "FIN", "Home") </a>
-                            <a class="dropdown-item" @Html.ActionLink("SWE", "SWE", "Home") </a>
+                            @for (int i = 0; i < L.tot; i++)
+                            {
+                                if (i != L.nr)
+                                {
+                                    <a class="dropdown-item"> @Html.ActionLink((T.txt[0, i]), (T.txt[0, i]), "Home") </a>
+                                }
+                            }
+
                         </div>
                     </li>
                 </ul>
