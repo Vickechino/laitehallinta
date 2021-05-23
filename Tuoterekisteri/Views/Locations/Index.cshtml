@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Tuoterekisteri.Models.Location>
+
+@{
+    ViewBag.Title = T.txt[16, L.nr];
+}
+
+<h2>@T.txt[16, L.nr]</h2>
+
+<p>
+    @Html.ActionLink(T.txt[17, L.nr], "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.location_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.location_row2)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.location_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.location_row2)
+        </td>
+        <td>
+            @Html.ActionLink(T.txt[11, L.nr], "Edit", new { id=item.location_id }) |
+            @Html.ActionLink(T.txt[18, L.nr], "Details", new { id=item.location_id }) |
+            @Html.ActionLink(T.txt[10, L.nr], "Delete", new { id=item.location_id })
+        </td>
+    </tr>
+}
+
+</table>

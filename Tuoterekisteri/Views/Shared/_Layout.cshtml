@@ -20,7 +20,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink(T.txt[7, L.nr], "Index", "Products")</li>
+
+
                     @if (Session["UserName"] == null)
                     {
                         <li>@Html.ActionLink(T.txt[1, L.nr], "Login", "Users")</li>
@@ -29,12 +30,22 @@
                     {
                         if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
                         {
-                            <li>@Html.ActionLink(T.txt[3, L.nr], "Index", "Users")</li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
+                                <div class="dropdown-menu" style="">
+                                    <a class="dropdown-item">@Html.ActionLink(T.txt[12, L.nr], "Index", "Users")</a>
+                                    <a class="dropdown-item">@Html.ActionLink(T.txt[13, L.nr], "Index", "Locations")</a>
+                                    <a class="dropdown-item">@Html.ActionLink(T.txt[7, L.nr], "Index", "Products")</a>
+                                    <a class="dropdown-item">@Html.ActionLink(T.txt[20, L.nr], "Index", "Productgroups")</a>
+                                </div>
+                            </li>
                         }
                         else { }
                         <li>@Html.ActionLink(T.txt[6, L.nr], "Logout", "Users")</li>
 
                     }
+
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">@(T.txt[0, L.nr])</a>

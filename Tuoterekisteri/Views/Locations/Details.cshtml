@@ -1,0 +1,34 @@
+﻿@model Tuoterekisteri.Models.Location
+
+@{
+    ViewBag.Title = T.txt[18, L.nr];
+}
+
+<h2>@T.txt[18, L.nr]</h2>
+
+<div>
+    <h4>@T.txt[14, L.nr]</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.location_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.location_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.location_row2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.location_row2)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(T.txt[11, L.nr], "Edit", new { id = Model.location_id }) |
+    @Html.ActionLink(T.txt[15, L.nr], "Index")
+</p>

@@ -1,0 +1,40 @@
+﻿@model Tuoterekisteri.Models.Location
+
+@{
+    ViewBag.Title = T.txt[10, L.nr];
+}
+
+<h2>@T.txt[10, L.nr]</h2>
+
+<h3>@T.txt[19, L.nr]</h3>
+<div>
+    <h4>@T.txt[14, L.nr]</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.location_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.location_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.location_row2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.location_row2)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink(T.txt[15, L.nr], "Index")
+        </div>
+    }
+</div>
