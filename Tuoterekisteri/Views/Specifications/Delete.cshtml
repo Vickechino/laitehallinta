@@ -1,31 +1,27 @@
-﻿@model Tuoterekisteri.Models.User
+﻿@model Tuoterekisteri.Models.Specification
 
 @{
     ViewBag.Title = T.txt[10, L.nr];
 }
 
-<h2>@(T.txt[10, L.nr])</h2>
+<h2>@T.txt[10, L.nr]</h2>
 
-<h3>@(T.txt[19, L.nr])</h3>
+<h3>@T.txt[19, L.nr]</h3>
 <div>
-    <h4>@(T.txt[2, L.nr])</h4>
+    <h4>@T.txt[29, L.nr]</h4>
     <hr />
     <dl class="dl-horizontal">
-        
+        <dt>
+            @T.txt[29, L.nr]
+        </dt>
+
         <dd>
-            @Html.DisplayFor(model => model.username)
+            @Html.DisplayFor(model => model.loan_spec)
         </dd>
 
-      
     </dl>
-    <div class="col-lg-offset-2">
-        <label class="text-danger">
-            @ViewBag.DeleteUserError
-        </label>
-    </div>
 
-    @using (Html.BeginForm())
-    {
+    @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

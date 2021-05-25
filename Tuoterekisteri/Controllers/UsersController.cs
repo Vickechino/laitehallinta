@@ -76,7 +76,7 @@ namespace Tuoterekisteri.Controllers
                 }
                 catch
                 {
-                    ViewBag.CreateUserError = "Error! Username taken?";
+                    ViewBag.CreateUserError = T.txt[26, L.nr];
                     return View();
                 }
 
@@ -112,7 +112,7 @@ namespace Tuoterekisteri.Controllers
                 }
                 catch
                 {
-                    ViewBag.DeleteUserError = "Error deleting user. User does no-longer exist?";
+                    ViewBag.DeleteUserError = T.txt[27, L.nr];
                     return View();
                 }
 
@@ -156,8 +156,8 @@ namespace Tuoterekisteri.Controllers
                     }
                     catch
                     {
-                        ViewBag.CreateUserError = "Error saving, Username taken?";
-                        return View();
+                        ViewBag.CreateUserError = T.txt[26, L.nr];
+                    return View();
                     }
 
             }

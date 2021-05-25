@@ -1,25 +1,19 @@
 ﻿@model Tuoterekisteri.Models.Product
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = T.txt[18, L.nr];
 }
 
-<h2>Details</h2>
+<h2>@T.txt[18, L.nr]</h2>
 
 <div>
-    <h4>Product</h4>
+    <h4>@T.txt[31, L.nr]</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.barcode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.barcode)
-        </dd>
+        >
 
         <dt>
-            @Html.DisplayNameFor(model => model.product_name)
+            @T.txt[35, L.nr]
         </dt>
 
         <dd>
@@ -27,7 +21,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.product_row2)
+            @T.txt[36, L.nr]
         </dt>
 
         <dd>
@@ -35,7 +29,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Productgroup.product_group_name)
+            @T.txt[34, L.nr]
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.barcode)
+        </dd>
+
+        <dt>
+            @T.txt[30, L.nr]
         </dt>
 
         <dd>
@@ -45,6 +47,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.product_id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(T.txt[11, L.nr], "Edit", new { id = Model.product_id }) |
+    @Html.ActionLink(T.txt[15, L.nr], "Index")
 </p>

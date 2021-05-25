@@ -1,18 +1,18 @@
 ﻿@model IEnumerable<Tuoterekisteri.Models.Productgroup>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = T.txt[16, L.nr];
 }
 
-<h2>Index</h2>
+<h2>@T.txt[16, L.nr]</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(T.txt[17, L.nr], "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.product_group_name)
+            @T.txt[30, L.nr]
         </th>
         <th></th>
     </tr>
@@ -23,9 +23,9 @@
             @Html.DisplayFor(modelItem => item.product_group_name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.product_group_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.product_group_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.product_group_id })
+            @Html.ActionLink(T.txt[11, L.nr], "Edit", new { id=item.product_group_id }) |
+            @Html.ActionLink(T.txt[18, L.nr], "Details", new { id=item.product_group_id }) |
+            @Html.ActionLink(T.txt[10, L.nr], "Delete", new { id=item.product_group_id })
         </td>
     </tr>
 }

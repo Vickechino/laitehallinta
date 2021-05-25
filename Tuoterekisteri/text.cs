@@ -10,7 +10,8 @@ public class T
 public static string[,] txt =
 {
 
-// T.txt[0, L.nr]
+//  T.txt[0, L.nr]   is the syntax for the variable,
+//  '0' replaced with actual number
 
 {"ENG", "FIN", "SWE" }, // 0
 {"Login", "Kirjaudu", "Logga in" }, // 1
@@ -21,7 +22,7 @@ public static string[,] txt =
 {"Logout", "Kirjaudu ulos", "Logga ut"}, // 6
 {"Products", "Tuotteet", "Produkter"}, // 7
 {"An error occurred.", "Tapahtui virhe", "Ett fel uppstod"}, // 8
-{"Create", "Lisää", "Lägg till"}, // 9
+{"Create", "Lisää", "Skapa"}, // 9
 {"Delete", "Poista", "Radera"}, // 10
 {"Edit", "Muuta", "Ändra"}, // 11
 {"Users", "Käyttäjät", "Användare"}, //12
@@ -35,17 +36,31 @@ public static string[,] txt =
 "Oletko varma että haluat poistaa tämän?",
 "Är du säker att du vill radera detta"},  //19
 {"Product Groups", "Tuoteryhmät", "Produktgrupper"}, //20
-{"", "", " "}, // 21
-{" ", " ", " "}, // 22
-{" ", " ", " "}, // 23
-{" ", " ", " "}, // 24
-{" ", " ", " "}, // 25
-{" ", " ", " "}, // 26
-{" ", " ", " "}, // 27
-{" ", " ", " "}, // 28
-{" ", " ", " "}, // 29
-{" ", " ", " "}, // 30
-{" ", " ", " "}, // 31
+{"Email", "S-posti", "E-post"}, // 21
+{"Fisrtname", "Etunimi", "Förnamn"}, // 22
+{"Lastname", "Sukunimi", "Släktnamn"}, // 23
+{"1 for admin, otherwise leave blank",
+"1 jos admin, muuten jätetään tyhjänä",
+"1 för admin, annars lämna tomt"}, // 24
+{"Save", "Talenna", "Spara"}, // 25
+{"Error. Username taken?",
+"Virhe. Käyttäjanimi varattu?",
+"Fel. Användarnamnet upptaget?"}, // 26
+{"Error. User does not exist?",
+"Virhe. Käyttäjä ei ole olemassa?",
+"Fel. Användaren finns inte?"}, // 27
+{"Lastseen", "Nähty", "Setts till"}, // 28
+{"Intended use", "Käyttötarkoitus", "Anv Ändamål"}, // 29
+{"Productgroup", "Tuoteryhmä", "Productgrupp"}, // 30
+{"Product", "Tuote", "Produkt"}, // 31
+{"Location Name", "Paikan Nimi", "Plats Namn"}, // 32
+{"Location Data", "Paikan Tiedot", "Platsens Data"}, // 33
+{"Barcode", "Viivakoodi", "Streckkod"}, // 34
+{"Productname", "Tuotenimi", "Produktnamn"}, // 35
+{"Productdata", "Tuotetieto", "Produktdata"}, // 36
+{" ", " ", " "}, // 37
+{" ", " ", " "}, // 38
+{" ", " ", " "}, // 39
 
 
 };

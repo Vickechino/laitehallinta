@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Careeria - Tuoterekisteri</title>
+    <title>Careeria</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -16,36 +16,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-               @Html.ActionLink("Home" , "Index", new { area = "" }, new { @class = "navbar-brand" })
+               @Html.ActionLink("Careeria" , "Index", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-
-
-                    @if (Session["UserName"] == null)
-                    {
-                        <li>@Html.ActionLink(T.txt[1, L.nr], "Login", "Users")</li>
-                    }
-                    else
-                    {
-                        if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
-                        {
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
-                                <div class="dropdown-menu" style="">
-                                    <a class="dropdown-item">@Html.ActionLink(T.txt[12, L.nr], "Index", "Users")</a>
-                                    <a class="dropdown-item">@Html.ActionLink(T.txt[13, L.nr], "Index", "Locations")</a>
-                                    <a class="dropdown-item">@Html.ActionLink(T.txt[7, L.nr], "Index", "Products")</a>
-                                    <a class="dropdown-item">@Html.ActionLink(T.txt[20, L.nr], "Index", "Productgroups")</a>
-                                </div>
-                            </li>
-                        }
-                        else { }
-                        <li>@Html.ActionLink(T.txt[6, L.nr], "Logout", "Users")</li>
-
-                    }
-
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">@(T.txt[0, L.nr])</a>
@@ -54,12 +28,36 @@
                             {
                                 if (i != L.nr)
                                 {
-                                    <a class="dropdown-item"> @Html.ActionLink((T.txt[0, i]), (T.txt[0, i]), "Home") </a>
+                                    <ul class="dropdown-item"> @Html.ActionLink((T.txt[0, i]), (T.txt[0, i]), "Home") </ul>
                                 }
                             }
 
                         </div>
                     </li>
+
+                    @if (Session["UserName"] == null)
+                    {
+                        <li>@Html.ActionLink(T.txt[1, L.nr], "Login", "Users")</li>
+                    }
+                    else
+                    {
+                       <li>@Html.ActionLink(T.txt[6, L.nr], "Logout", "Users")</li>
+                    }
+
+                    @if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+                    {
+                          <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
+                              <div class="dropdown-menu" style="">
+                                  <ul class="dropdown-item">@Html.ActionLink(T.txt[12, L.nr], "Index", "Users")</ul>
+                                  <ul class="dropdown-item">@Html.ActionLink(T.txt[13, L.nr], "Index", "Locations")</ul>
+                                  <ul class="dropdown-item">@Html.ActionLink(T.txt[7, L.nr], "Index", "Products")</ul>
+                                  <ul class="dropdown-item">@Html.ActionLink(T.txt[20, L.nr], "Index", "Productgroups")</ul>
+                                  <ul class="dropdown-item">@Html.ActionLink(T.txt[29, L.nr], "Index", "Specifications")</ul>
+                              </div>
+                          </li>
+                     }
+                        
                 </ul>
             </div>
         </div>

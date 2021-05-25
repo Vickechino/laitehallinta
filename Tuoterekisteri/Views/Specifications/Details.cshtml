@@ -1,0 +1,26 @@
+﻿@model Tuoterekisteri.Models.Specification
+
+@{
+    ViewBag.Title = T.txt[18, L.nr];
+}
+
+<h2>@T.txt[18, L.nr]</h2>
+
+<div>
+    <h4>@T.txt[29, L.nr]</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @T.txt[29, L.nr]
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.loan_spec)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(T.txt[11, L.nr], "Edit", new { id = Model.spec_id }) |
+    @Html.ActionLink(T.txt[15, L.nr], "Index")
+</p>
