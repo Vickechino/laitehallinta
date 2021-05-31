@@ -14,16 +14,23 @@ namespace Tuoterekisteri.Controllers
     {
         private LaitehallintaEntities db = new LaitehallintaEntities();
 
+
         // GET: Locations
         public ActionResult Index()
         {
-            return View(db.Locations.ToList());
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+                return View(db.Locations.ToList());
+            }
+            else return RedirectToAction("Index", "Home");
         }
 
         // GET: Locations/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+                if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -33,6 +40,8 @@ namespace Tuoterekisteri.Controllers
                 return HttpNotFound();
             }
             return View(location);
+            }
+            else return RedirectToAction("Index", "Home");
         }
 
         // GET: Locations/Create
@@ -48,7 +57,9 @@ namespace Tuoterekisteri.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "location_id,location_name,location_row2")] Location location)
         {
-            if (ModelState.IsValid)
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+                if (ModelState.IsValid)
             {
                 db.Locations.Add(location);
                 db.SaveChanges();
@@ -56,12 +67,16 @@ namespace Tuoterekisteri.Controllers
             }
 
             return View(location);
+            }
+            else return RedirectToAction("Index", "Home");
         }
 
         // GET: Locations/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+                if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -71,6 +86,8 @@ namespace Tuoterekisteri.Controllers
                 return HttpNotFound();
             }
             return View(location);
+            }
+            else return RedirectToAction("Index", "Home");
         }
 
         // POST: Locations/Edit/5
@@ -92,7 +109,10 @@ namespace Tuoterekisteri.Controllers
         // GET: Locations/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+                if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -102,6 +122,9 @@ namespace Tuoterekisteri.Controllers
                 return HttpNotFound();
             }
             return View(location);
+
+            }
+            else return RedirectToAction("Index", "Home");
         }
 
         // POST: Locations/Delete/5
@@ -109,10 +132,16 @@ namespace Tuoterekisteri.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
             Location location = db.Locations.Find(id);
             db.Locations.Remove(location);
             db.SaveChanges();
             return RedirectToAction("Index");
+
+            }
+            else return RedirectToAction("Index", "Home");
         }
 
         protected override void Dispose(bool disposing)

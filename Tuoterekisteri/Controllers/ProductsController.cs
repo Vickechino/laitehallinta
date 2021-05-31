@@ -17,14 +17,28 @@ namespace Tuoterekisteri.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.Productgroup);
+
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+
+                var products = db.Products.Include(p => p.Productgroup);
             return View(products.ToList());
+
+
+            }
+            else return RedirectToAction("Index", "Home");
+
         }
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+
+
+                if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -34,13 +48,25 @@ namespace Tuoterekisteri.Controllers
                 return HttpNotFound();
             }
             return View(product);
+
+            }
+            else return RedirectToAction("Index", "Home");
+
         }
 
         // GET: Products/Create
         public ActionResult Create()
         {
-            ViewBag.product_group_id = new SelectList(db.Productgroups, "product_group_id", "product_group_name");
+
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+                ViewBag.product_group_id = new SelectList(db.Productgroups, "product_group_id", "product_group_name");
             return View();
+
+
+            }
+            else return RedirectToAction("Index", "Home");
+
         }
 
         // POST: Products/Create
@@ -50,7 +76,13 @@ namespace Tuoterekisteri.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "product_id,barcode,product_name,product_row2,product_group_id")] Product product)
         {
-            if (ModelState.IsValid)
+
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+
+
+
+                if (ModelState.IsValid)
             {
                 db.Products.Add(product);
                 db.SaveChanges();
@@ -59,12 +91,20 @@ namespace Tuoterekisteri.Controllers
 
             ViewBag.product_group_id = new SelectList(db.Productgroups, "product_group_id", "product_group_name", product.product_group_id);
             return View(product);
+
+            }
+            else return RedirectToAction("Index", "Home");
+
         }
 
         // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+
+                if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -75,6 +115,11 @@ namespace Tuoterekisteri.Controllers
             }
             ViewBag.product_group_id = new SelectList(db.Productgroups, "product_group_id", "product_group_name", product.product_group_id);
             return View(product);
+
+
+            }
+            else return RedirectToAction("Index", "Home");
+
         }
 
         // POST: Products/Edit/5
@@ -84,7 +129,10 @@ namespace Tuoterekisteri.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "product_id,barcode,product_name,product_row2,product_group_id")] Product product)
         {
-            if (ModelState.IsValid)
+
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+                if (ModelState.IsValid)
             {
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
@@ -92,12 +140,21 @@ namespace Tuoterekisteri.Controllers
             }
             ViewBag.product_group_id = new SelectList(db.Productgroups, "product_group_id", "product_group_name", product.product_group_id);
             return View(product);
+
+
+            }
+            else return RedirectToAction("Index", "Home");
+
         }
 
         // GET: Products/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+
+                if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -107,6 +164,12 @@ namespace Tuoterekisteri.Controllers
                 return HttpNotFound();
             }
             return View(product);
+
+
+
+            }
+            else return RedirectToAction("Index", "Home");
+
         }
 
         // POST: Products/Delete/5
@@ -114,10 +177,18 @@ namespace Tuoterekisteri.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
+
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+
+                Product product = db.Products.Find(id);
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
+
+            }
+            else return RedirectToAction("Index", "Home");
+
         }
 
         protected override void Dispose(bool disposing)

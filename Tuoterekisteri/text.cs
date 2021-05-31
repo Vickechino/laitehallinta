@@ -5,6 +5,11 @@ using System.Web;
 
 namespace Tuoterekisteri
 {
+public class L
+{
+public static int nr = 1; // Setting initial language
+public static int tot = 3; //setting language amount
+}
 public class T
 {
 public static string[,] txt =
@@ -51,14 +56,14 @@ public static string[,] txt =
 "Fel. Användaren finns inte?"}, // 27
 {"Lastseen", "Nähty", "Setts till"}, // 28
 {"Intended use", "Käyttötarkoitus", "Anv Ändamål"}, // 29
-{"Productgroup", "Tuoteryhmä", "Productgrupp"}, // 30
+{"Productgroup", "Tuoteryhmä", "Produktgrupp"}, // 30
 {"Product", "Tuote", "Produkt"}, // 31
 {"Location Name", "Paikan Nimi", "Plats Namn"}, // 32
 {"Location Data", "Paikan Tiedot", "Platsens Data"}, // 33
 {"Barcode", "Viivakoodi", "Streckkod"}, // 34
 {"Productname", "Tuotenimi", "Produktnamn"}, // 35
 {"Productdata", "Tuotetieto", "Produktdata"}, // 36
-{" ", " ", " "}, // 37
+{"Logged In", "Kirjautunut", "Inloggad"}, // 37
 {" ", " ", " "}, // 38
 {" ", " ", " "}, // 39
 

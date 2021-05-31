@@ -17,13 +17,22 @@ namespace Tuoterekisteri.Controllers
         // GET: Productgroups
         public ActionResult Index()
         {
-            return View(db.Productgroups.ToList());
+
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+                return View(db.Productgroups.ToList());
+
+            }
+            else return RedirectToAction("Index", "Home");
         }
 
         // GET: Productgroups/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+
+                if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -33,12 +42,21 @@ namespace Tuoterekisteri.Controllers
                 return HttpNotFound();
             }
             return View(productgroup);
+
+            }
+            else return RedirectToAction("Index", "Home");
         }
 
         // GET: Productgroups/Create
         public ActionResult Create()
         {
-            return View();
+
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+                return View();
+
+            }
+            else return RedirectToAction("Index", "Home");
         }
 
         // POST: Productgroups/Create
@@ -48,7 +66,10 @@ namespace Tuoterekisteri.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "product_group_id,product_group_name")] Productgroup productgroup)
         {
-            if (ModelState.IsValid)
+
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+                if (ModelState.IsValid)
             {
                 db.Productgroups.Add(productgroup);
                 db.SaveChanges();
@@ -56,12 +77,18 @@ namespace Tuoterekisteri.Controllers
             }
 
             return View(productgroup);
+
+            }
+            else return RedirectToAction("Index", "Home");
         }
 
         // GET: Productgroups/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+                if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -71,6 +98,9 @@ namespace Tuoterekisteri.Controllers
                 return HttpNotFound();
             }
             return View(productgroup);
+
+            }
+            else return RedirectToAction("Index", "Home");
         }
 
         // POST: Productgroups/Edit/5
@@ -80,19 +110,26 @@ namespace Tuoterekisteri.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "product_group_id,product_group_name")] Productgroup productgroup)
         {
-            if (ModelState.IsValid)
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+                if (ModelState.IsValid)
             {
                 db.Entry(productgroup).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(productgroup);
+            }
+            else return RedirectToAction("Index", "Home");
         }
 
         // GET: Productgroups/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+                if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -102,6 +139,10 @@ namespace Tuoterekisteri.Controllers
                 return HttpNotFound();
             }
             return View(productgroup);
+
+            }
+            else return RedirectToAction("Index", "Home");
+
         }
 
         // POST: Productgroups/Delete/5
@@ -109,10 +150,18 @@ namespace Tuoterekisteri.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Productgroup productgroup = db.Productgroups.Find(id);
+
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+
+                Productgroup productgroup = db.Productgroups.Find(id);
             db.Productgroups.Remove(productgroup);
             db.SaveChanges();
             return RedirectToAction("Index");
+
+            }
+            else return RedirectToAction("Index", "Home");
+
         }
 
         protected override void Dispose(bool disposing)

@@ -15,6 +15,7 @@ namespace Tuoterekisteri.Controllers
         // GET: Users
         public ActionResult Index()
         {
+
             if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
             {
                 List<User> model = db.Users.ToList();
