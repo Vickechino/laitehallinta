@@ -57,7 +57,8 @@ namespace Tuoterekisteri.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "location_id,location_name,location_row2")] Location location)
         {
-            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1" )
             {
                 if (ModelState.IsValid)
             {
