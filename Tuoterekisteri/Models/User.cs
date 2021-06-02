@@ -23,11 +23,11 @@ namespace Tuoterekisteri.Models
     
         public int user_id { get; set; }
         public string email { get; set; }
-        [Required]
+        
         public string password { get; set; }
         public Nullable<System.DateTime> lastSeen { get; set; }
         public string admin { get; set; }
-        [Required]
+        
         public string username { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
