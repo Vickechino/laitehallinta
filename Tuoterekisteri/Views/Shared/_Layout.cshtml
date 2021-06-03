@@ -16,13 +16,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-               @Html.ActionLink("Careeria" , "Index", new { area = "" }, new { @class = "navbar-brand" })
+               @Html.ActionLink("Careeria" , "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
 
+
+                    
+
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">@(T.txt[0, L.nr])</a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false"><img src="~/images/@(T.txt[0, L.nr]).png" alt="flag"></a>
                         <div class="dropdown-menu" style="">
                             @for (int i = 0; i < L.tot; i++)
                             {
@@ -41,24 +44,24 @@
                     }
                     else
                     {
-                       <li>@Html.ActionLink(T.txt[6, L.nr], "Logout", "Users")</li>
+                        <li>@Html.ActionLink(T.txt[6, L.nr], "Logout", "Users")</li>
                     }
 
                     @if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
                     {
-                          <li class="nav-item dropdown">
-                              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
-                              <div class="dropdown-menu" style="">
-                                  <ul class="dropdown-item">@Html.ActionLink(T.txt[12, L.nr], "Index", "Users")</ul>
-                                  <ul class="dropdown-item">@Html.ActionLink(T.txt[13, L.nr], "Index", "Locations")</ul>
-                                  <ul class="dropdown-item">@Html.ActionLink(T.txt[7, L.nr], "Index", "Products")</ul>
-                                  <ul class="dropdown-item">@Html.ActionLink(T.txt[20, L.nr], "Index", "Productgroups")</ul>
-                                  <ul class="dropdown-item">@Html.ActionLink(T.txt[29, L.nr], "Index", "Specifications")</ul>
-                                  <ul class="dropdown-item">@Html.ActionLink(T.txt[38, L.nr], "Index", "Loans")</ul>
-                              </div>
-                          </li>
-                     }
-                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
+                            <div class="dropdown-menu" style="">
+                                <ul class="dropdown-item">@Html.ActionLink(T.txt[12, L.nr], "Index", "Users")</ul>
+                                <ul class="dropdown-item">@Html.ActionLink(T.txt[13, L.nr], "Index", "Locations")</ul>
+                                <ul class="dropdown-item">@Html.ActionLink(T.txt[7, L.nr], "Index", "Products")</ul>
+                                <ul class="dropdown-item">@Html.ActionLink(T.txt[20, L.nr], "Index", "Productgroups")</ul>
+                                <ul class="dropdown-item">@Html.ActionLink(T.txt[29, L.nr], "Index", "Specifications")</ul>
+                                <ul class="dropdown-item">@Html.ActionLink(T.txt[38, L.nr], "Index", "Loans")</ul>
+                            </div>
+                        </li>
+                    }
+
                 </ul>
             </div>
         </div>
@@ -68,7 +71,7 @@
         @RenderBody()
 
         <footer>
-           
+            
         </footer>
     </div>
 
