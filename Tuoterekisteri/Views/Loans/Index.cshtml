@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Tuoterekisteri.Models.Loan>
+
+@{
+    ViewBag.Title = T.txt[16, L.nr];
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink(T.txt[17, L.nr], "Create")
+    </p>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.loan_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.user_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.location_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.product_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.loaned_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.spec_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.status)
+            </th>
+            <th></th>
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.loan_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.user_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.location_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.product_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.loaned_date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.spec_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.status)
+                </td>
+                <td>
+                    @Html.ActionLink(T.txt[11, L.nr], "Edit", new { id=item.loan_id  }) |
+                    @Html.ActionLink(T.txt[18, L.nr], "Details", new {  id=item.loan_id }) |
+                    @Html.ActionLink(T.txt[10, L.nr], "Delete", new {  id=item.loan_id })
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

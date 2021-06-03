@@ -40,7 +40,7 @@ public static string[,] txt =
 {"Fisrtname", "Etunimi", "Förnamn"}, // 22
 {"Lastname", "Sukunimi", "Släktnamn"}, // 23
 {"1 for admin, otherwise leave blank",
-"1 jos admin, muuten jätetään tyhjänä",
+"1 jos admin, muuten jätetään tyhjäksi",
 "1 för admin, annars lämna tomt"}, // 24
 {"Save", "Talenna", "Spara"}, // 25
 {"Error. Username taken?",
@@ -58,7 +58,7 @@ public static string[,] txt =
 {"Barcode", "Viivakoodi", "Streckkod"}, // 34
 {"Productname", "Tuotenimi", "Produktnamn"}, // 35
 {"Productdata", "Tuotetieto", "Produktdata"}, // 36
-{" ", " ", " "}, // 37
+{"Loans", "Lainat", "Lån"}, // 37
 {" ", " ", " "}, // 38
 {" ", " ", " "}, // 39
 

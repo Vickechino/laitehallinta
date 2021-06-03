@@ -13,7 +13,7 @@
           <Property Name="user_id" Type="int" />
           <Property Name="location_id" Type="int" />
           <Property Name="product_id" Type="int" />
-          <Property Name="loaned_date" Type="datetime" />
+          <Property Name="loaned_date" Type="date" />
           <Property Name="spec_id" Type="int" />
           <Property Name="status" Type="int" Nullable="false" />
         </EntityType>
@@ -162,7 +162,7 @@
           <Property Name="user_id" Type="Int32" />
           <Property Name="location_id" Type="Int32" />
           <Property Name="product_id" Type="Int32" />
-          <Property Name="loaned_date" Type="DateTime" Precision="3" />
+          <Property Name="loaned_date" Type="DateTime" Precision="0" />
           <Property Name="spec_id" Type="Int32" />
           <NavigationProperty Name="Location" Relationship="Self.FK__Loans__location___440B1D61" FromRole="Loans" ToRole="Locations" />
           <NavigationProperty Name="Product" Relationship="Self.FK__Loans__product_i__4316F928" FromRole="Loans" ToRole="Products" />
