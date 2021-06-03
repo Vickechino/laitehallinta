@@ -40,7 +40,7 @@ namespace Tuoterekisteri.Controllers
             else return RedirectToAction("Index", "Home");
         }
         [HttpPost]
-        public ActionResult Create([Bind(Include = "user_id, location_id, product_id, loaned_date.Date, spec_id, status")] Loan newLoan)
+        public ActionResult Create([Bind(Include = "user_id, location_id, product_id, loaned_date, spec_id, status")] Loan newLoan)
         {
             if (ModelState.IsValid && Session["UserName"] != null && Session["Permission"].ToString() == "1")
             {

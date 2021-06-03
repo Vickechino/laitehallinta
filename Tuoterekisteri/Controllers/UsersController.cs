@@ -39,6 +39,12 @@ namespace Tuoterekisteri.Controllers
                 ViewBag.Loggedstatus = "In";
                 Session["UserName"] = LoggedUser.username;
                 Session["Permission"] = LoggedUser.admin;
+                User user = db.Users.Find(LoggedUser.user_id);
+                user.lastSeen = DateTime.Now;
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+
+
                 return RedirectToAction("Index", "Home");
             }
             else

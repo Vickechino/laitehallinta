@@ -17,7 +17,7 @@
             @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>Create a Loan</h4>
+            <h4>@T.txt[9, L.nr]</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -25,7 +25,7 @@
             @Html.LabelFor(model => model.loaned_date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="date" id="start" name="loaned_date"
-               value="@DateTime.Today" min="2020-01-01" max="2099-12-31">
+               value="2021-06-01" min="2021-01-01" max="2099-12-31">
 
                 @Html.ValidationMessageFor(model => model.loaned_date, "", new { @class = "text-danger" })
             </div>
@@ -81,7 +81,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="@T.txt[9, L.nr]" class="btn btn-default" />
                 </div>
             </div>
         </div>

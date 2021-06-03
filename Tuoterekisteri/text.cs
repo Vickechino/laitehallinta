@@ -64,7 +64,7 @@ public static string[,] txt =
 {"Productname", "Tuotenimi", "Produktnamn"}, // 35
 {"Productdata", "Tuotetieto", "Produktdata"}, // 36
 {"Logged In", "Kirjautunut", "Inloggad"}, // 37
-{" ", " ", " "}, // 38
+{"Loans", "Lainat", "Lån"}, // 38
 {" ", " ", " "}, // 39
 
 
