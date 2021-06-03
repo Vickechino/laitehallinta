@@ -11,7 +11,9 @@ namespace Tuoterekisteri.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+
     public partial class Location
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,6 +23,7 @@ namespace Tuoterekisteri.Models
         }
     
         public int location_id { get; set; }
+        [Required]
         public string location_name { get; set; }
         public string location_row2 { get; set; }
     

@@ -17,13 +17,24 @@ namespace Tuoterekisteri.Controllers
         // GET: Specifications
         public ActionResult Index()
         {
-            return View(db.Specifications.ToList());
+
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+
+                return View(db.Specifications.ToList());
+
+            }
+            else return RedirectToAction("Index", "Home");
+
         }
 
         // GET: Specifications/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+                if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -33,12 +44,21 @@ namespace Tuoterekisteri.Controllers
                 return HttpNotFound();
             }
             return View(specification);
+
+            }
+            else return RedirectToAction("Index", "Home");
+
         }
 
         // GET: Specifications/Create
         public ActionResult Create()
         {
-            return View();
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+                return View();
+            }
+            else return RedirectToAction("Index", "Home");
+
         }
 
         // POST: Specifications/Create
@@ -48,7 +68,10 @@ namespace Tuoterekisteri.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "spec_id,loan_spec")] Specification specification)
         {
-            if (ModelState.IsValid)
+
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+                if (ModelState.IsValid)
             {
                 db.Specifications.Add(specification);
                 db.SaveChanges();
@@ -56,12 +79,19 @@ namespace Tuoterekisteri.Controllers
             }
 
             return View(specification);
+
+            }
+            else return RedirectToAction("Index", "Home");
+
         }
 
         // GET: Specifications/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+                if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -71,6 +101,10 @@ namespace Tuoterekisteri.Controllers
                 return HttpNotFound();
             }
             return View(specification);
+
+            }
+            else return RedirectToAction("Index", "Home");
+
         }
 
         // POST: Specifications/Edit/5
@@ -80,19 +114,27 @@ namespace Tuoterekisteri.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "spec_id,loan_spec")] Specification specification)
         {
-            if (ModelState.IsValid)
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+                if (ModelState.IsValid)
             {
                 db.Entry(specification).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(specification);
+
+            }
+            else return RedirectToAction("Index", "Home");
+
         }
 
         // GET: Specifications/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+                if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -102,6 +144,10 @@ namespace Tuoterekisteri.Controllers
                 return HttpNotFound();
             }
             return View(specification);
+
+            }
+            else return RedirectToAction("Index", "Home");
+
         }
 
         // POST: Specifications/Delete/5
@@ -109,10 +155,18 @@ namespace Tuoterekisteri.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Specification specification = db.Specifications.Find(id);
+
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+                Specification specification = db.Specifications.Find(id);
             db.Specifications.Remove(specification);
             db.SaveChanges();
             return RedirectToAction("Index");
+
+
+            }
+            else return RedirectToAction("Index", "Home");
+
         }
 
         protected override void Dispose(bool disposing)
