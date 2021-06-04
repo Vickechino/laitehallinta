@@ -50,7 +50,7 @@ namespace Tuoterekisteri.Controllers
             {
                 ViewBag.LoginMessage = "Login unsuccessfull";
                 ViewBag.Loggedstatus = "Out";
-                //LoginModel.LoginErrorMessage = "Väärä käyttäjätunnus/salasana";
+                LoginModel.LoginErrorMessage = "Väärä käyttäjätunnus/salasana";
                 return View("Login", LoginModel);
             }
         }
@@ -113,7 +113,7 @@ namespace Tuoterekisteri.Controllers
 
                     db.Users.Remove(user);
                     db.SaveChanges();
-                    if (Session["UserName"].ToString().ToLower() == user.username.ToString().ToLower()) { return RedirectToAction("Logout", "Users"); } //Should consider removing some casts
+                    if (Session["UserName"].ToString() == user.username) { return RedirectToAction("Logout", "Users"); } 
                     return RedirectToAction("Index");
                 }
                 catch
