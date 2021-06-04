@@ -94,5 +94,22 @@ namespace Tuoterekisteri.Controllers
             }
             else return RedirectToAction("Index");
         }
+        public ActionResult Details(int? id)
+        {
+            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Loan loan = db.Loans.Find(id);
+                if (loan == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                return View(loan);
+            }
+            else return RedirectToAction("login", "Users");
+        }
     }
     }

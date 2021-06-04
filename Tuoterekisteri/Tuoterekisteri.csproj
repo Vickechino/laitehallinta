@@ -259,6 +259,7 @@
     <Content Include="Views\Loans\Index.cshtml" />
     <Content Include="Views\Loans\Create.cshtml" />
     <Content Include="Views\Loans\Delete.cshtml" />
+    <Content Include="Views\Loans\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
