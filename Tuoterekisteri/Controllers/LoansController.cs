@@ -96,12 +96,12 @@ namespace Tuoterekisteri.Controllers
         }
         public ActionResult Details(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
                 Loan loan = db.Loans.Find(id);
                 if (loan == null)
                 {

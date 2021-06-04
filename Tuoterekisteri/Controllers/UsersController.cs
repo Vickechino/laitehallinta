@@ -6,6 +6,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Tuoterekisteri.Models;
+using System.Security.Cryptography;
+
 
 namespace Tuoterekisteri.Controllers
 {
@@ -32,6 +34,10 @@ namespace Tuoterekisteri.Controllers
         [HttpPost]
         public ActionResult Authorize(User LoginModel)
         {
+            string enteredpw = LoginModel.password;
+            var bpassword = System.Text.Encoding.UTF8.GetBytes(enteredpw);
+            var hash = System.Security.Cryptography.MD5.Create().ComputeHash(bpassword);
+            LoginModel.password = Convert.ToBase64String(hash);
             var LoggedUser = db.Users.SingleOrDefault(x => x.username == LoginModel.username && x.password == LoginModel.password);
             if (LoggedUser != null)
             {
@@ -76,6 +82,10 @@ namespace Tuoterekisteri.Controllers
             {
                 try
                 {
+                    string enteredpw = newUser.password;
+                    var bpassword = System.Text.Encoding.UTF8.GetBytes(enteredpw);
+                    var hash = System.Security.Cryptography.MD5.Create().ComputeHash(bpassword);
+                    newUser.password = Convert.ToBase64String(hash);
                     db.Users.Add(newUser);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -156,7 +166,11 @@ namespace Tuoterekisteri.Controllers
             {
                     try
                     {
-                        db.Entry(user).State = EntityState.Modified;
+                    string enteredpw = user.password;
+                    var bpassword = System.Text.Encoding.UTF8.GetBytes(enteredpw);
+                    var hash = System.Security.Cryptography.MD5.Create().ComputeHash(bpassword);
+                    user.password = Convert.ToBase64String(hash);
+                    db.Entry(user).State = EntityState.Modified;
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }
