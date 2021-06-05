@@ -22,7 +22,7 @@
                 <ul class="nav navbar-nav">
 
 
-                    
+
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false"><img src="~/images/@(T.txt[0, L.nr]).png" alt="flag"></a>
@@ -45,6 +45,8 @@
                     else
                     {
                         <li>@Html.ActionLink(T.txt[6, L.nr], "Logout", "Users")</li>
+                        <li>@Html.ActionLink(T.txt[43, L.nr], "Loan", "Loans")</li>
+                        <li>@Html.ActionLink(T.txt[42, L.nr], "Return", "Loans")</li>
                     }
 
                     @if (Session["Permission"] != null && Session["Permission"].ToString() == "1")

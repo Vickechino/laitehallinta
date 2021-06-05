@@ -11,8 +11,7 @@ namespace Tuoterekisteri.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,7 +22,6 @@ namespace Tuoterekisteri.Models
     
         public int product_id { get; set; }
         public Nullable<int> barcode { get; set; }
-        [Required]
         public string product_name { get; set; }
         public string product_row2 { get; set; }
         public Nullable<int> product_group_id { get; set; }

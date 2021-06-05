@@ -11,8 +11,7 @@ namespace Tuoterekisteri.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,11 +22,9 @@ namespace Tuoterekisteri.Models
     
         public int user_id { get; set; }
         public string email { get; set; }
-        
         public string password { get; set; }
         public Nullable<System.DateTime> lastSeen { get; set; }
         public string admin { get; set; }
-        
         public string username { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }

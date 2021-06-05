@@ -4,12 +4,11 @@
         ViewBag.Title = T.txt[9, L.nr];
     }
 
-    <!DOCTYPE html>
-
+   
     <html>
     <head>
         <meta name="viewport" content="width=device-width" />
-        <title>Create</title>
+        <title>@T.txt[9, L.nr]</title>
     </head>
     <body>
         @using (Html.BeginForm())
@@ -88,7 +87,7 @@
             }
 
             <div>
-                @Html.ActionLink("Back to List", "Index")
+                @Html.ActionLink(T.txt[15, L.nr], "Index")
             </div>
 </body>
 </html>

@@ -65,13 +65,21 @@ public static string[,] txt =
 {"Productdata", "Tuotetieto", "Produktdata"}, // 36
 {"Logged In", "Kirjautunut", "Inloggad"}, // 37
 {"Loans", "Lainat", "Lån"}, // 38
-{" ", " ", " "}, // 39
-{" ", " ", " "}, // 40
-{" ", " ", " "}, // 41
-{" ", " ", " "}, // 42
-{" ", " ", " "}, // 43
-{" ", " ", " "}, // 44
-
+{"Loaned", "Lainattu", "Lånat"}, // 39
+{"Loan", "Laina", "Lån"}, // 40
+{"Loandisk", "Lainatiski", "Lånedisken"}, // 41
+{"Return", "Palauta", "Returnera"}, // 42
+{"Loan", "Lainaa", "Låna"}, // 43
+{"Allowed Return", "Palautuspaikka",
+"Återlämningsplats"}, // 44
+{"Bad Username / Password",
+"Väärä Käyttäjänimi / Salasana",
+"Fel Användarnamn / Lösenord"}, // 45
+{" ", " ", " "}, // 46
+{" ", " ", " "}, // 47
+{" ", " ", " "}, // 48
+{" ", " ", " "}, // 49
+{" ", " ", " "}, // 50
 
 };
 }

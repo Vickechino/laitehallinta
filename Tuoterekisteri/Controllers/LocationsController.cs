@@ -55,7 +55,7 @@ namespace Tuoterekisteri.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "location_id,location_name,location_row2")] Location location)
+        public ActionResult Create([Bind(Include = "location_id,location_name,location_row2,location_returnable")] Location location)
         {
             
             if (Session["Permission"] != null && Session["Permission"].ToString() == "1" )
@@ -96,7 +96,7 @@ namespace Tuoterekisteri.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "location_id,location_name,location_row2")] Location location)
+        public ActionResult Edit([Bind(Include = "location_id,location_name,location_row2,location_returnable")] Location location)
         {
             if (ModelState.IsValid)
             {

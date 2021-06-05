@@ -16,6 +16,8 @@
         <AssociationConnector Association="LaitehallintaModel.FK__Loans__spec_id__44FF419A" ManuallyRouted="false" />
         <AssociationConnector Association="LaitehallintaModel.FK__Loans__user_id__4222D4EF" ManuallyRouted="false" />
         <AssociationConnector Association="LaitehallintaModel.FK__Products__produc__3B75D760" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="LaitehallintaModel.sysdiagram" Width="1.5" PointX="5.375" PointY="5.75" />
+        <EntityTypeShape EntityType="LaitehallintaModel.database_firewall_rules" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

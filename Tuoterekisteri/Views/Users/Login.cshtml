@@ -30,12 +30,12 @@
         </div>
         <div class="col-lg-offset-2">
             <label class="text-danger">
-                @Html.DisplayFor(model => model.LoginErrorMessage)
+                @*@Html.DisplayFor(model => model.LoginErrorMessage)*@
             </label>
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="@T.txt[1, L.nr]" class="btn btn-default" />
+                <input type="submit" value=@T.txt[1, L.nr] class="btn btn-default" />
             </div>
         </div>
     </div>

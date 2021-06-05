@@ -4,15 +4,14 @@
     ViewBag.Title = T.txt[10, L.nr];
 }
 
-<!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Delete</title>
+    <title>@T.txt[10, L.nr]</title>
 </head>
 <body>
-    <h3>Are you sure you want to delete this?</h3>
+    <h3>@T.txt[19, L.nr]</h3>
     <div>
         <h4>Loan</h4>
         <hr />
@@ -79,8 +78,8 @@
             @Html.AntiForgeryToken()
     
             <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
-                @Html.ActionLink("Back to List", "Index")
+                <input type="submit" value=@T.txt[10, L.nr] class="btn btn-default" /> |
+                @Html.ActionLink(T.txt[15, L.nr], "Index")
             </div>
         }
     </div>

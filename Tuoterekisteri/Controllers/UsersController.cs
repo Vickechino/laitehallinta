@@ -123,7 +123,7 @@ namespace Tuoterekisteri.Controllers
 
                     db.Users.Remove(user);
                     db.SaveChanges();
-                    if (Session["UserName"].ToString() == user.username) { return RedirectToAction("Logout", "Users"); } 
+                    if (Session["UserName"].ToString() == user.username) { return RedirectToAction("Logout", "Users"); }
                     return RedirectToAction("Index");
                 }
                 catch
@@ -155,7 +155,7 @@ namespace Tuoterekisteri.Controllers
                 return RedirectToAction("Index");
             }
             finally { db.Dispose(); }
-            
+
 
         }
         [HttpPost]
@@ -164,21 +164,21 @@ namespace Tuoterekisteri.Controllers
         {
             if (ModelState.IsValid && (Session["UserName"] != null))
             {
-                    try
-                    {
+                try
+                {
                     string enteredpw = user.password;
                     var bpassword = System.Text.Encoding.UTF8.GetBytes(enteredpw);
                     var hash = System.Security.Cryptography.MD5.Create().ComputeHash(bpassword);
                     user.password = Convert.ToBase64String(hash);
                     db.Entry(user).State = EntityState.Modified;
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
-                    }
-                    catch
-                    {
-                        ViewBag.CreateUserError = T.txt[26, L.nr];
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    ViewBag.CreateUserError = T.txt[26, L.nr];
                     return View();
-                    }
+                }
 
             }
             return View(User);
