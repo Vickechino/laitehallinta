@@ -33,27 +33,6 @@ namespace Tuoterekisteri.Controllers
         }
 
 
-
-        public ActionResult Loan()
-        {
-            if (Session["UserName"] != null)
-            {
-                return View();
-            }
-            else return RedirectToAction("Index", "Home");
-        }
-
-        public ActionResult Return()
-        {
-            if (Session["UserName"] != null)
-            {
-                return View();
-            }
-            else return RedirectToAction("Index", "Home");
-        }
-
-
-
         public ActionResult Create()
         {
             if (Session["UserName"] != null && Session["Permission"].ToString() == "1")

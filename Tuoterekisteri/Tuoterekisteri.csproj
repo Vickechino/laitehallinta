@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoansController.cs" />
+    <Compile Include="Controllers\LoanxController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\ProductgroupsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -272,8 +273,11 @@
     <Content Include="Views\Loans\Create.cshtml" />
     <Content Include="Views\Loans\Delete.cshtml" />
     <Content Include="Views\Loans\Details.cshtml" />
-    <Content Include="Views\Loans\Loan.cshtml" />
-    <Content Include="Views\Loans\Return.cshtml" />
+    <Content Include="Views\Loanx\Create.cshtml" />
+    <Content Include="Views\Loanx\Delete.cshtml" />
+    <Content Include="Views\Loanx\Details.cshtml" />
+    <Content Include="Views\Loanx\Edit.cshtml" />
+    <Content Include="Views\Loanx\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

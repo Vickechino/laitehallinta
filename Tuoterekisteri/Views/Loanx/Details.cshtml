@@ -1,0 +1,66 @@
+﻿@model Tuoterekisteri.Models.Loan
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Loan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.loaned_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.loaned_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location.location_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location.location_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.product_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.product_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Specification.loan_spec)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Specification.loan_spec)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.email)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.loan_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
