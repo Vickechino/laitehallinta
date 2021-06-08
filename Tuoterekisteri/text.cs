@@ -45,7 +45,7 @@ public static string[,] txt =
 {"Fisrtname", "Etunimi", "Förnamn"}, // 22
 {"Lastname", "Sukunimi", "Släktnamn"}, // 23
 {"1 for admin, otherwise leave blank",
-"1 jos admin, muuten jätetään tyhjänä",
+"1 jos admin, muuten jätetään tyhjäksi",
 "1 för admin, annars lämna tomt"}, // 24
 {"Save", "Talenna", "Spara"}, // 25
 {"Error. Username taken?",
@@ -75,7 +75,9 @@ public static string[,] txt =
 {"Bad Username / Password",
 "Väärä Käyttäjänimi / Salasana",
 "Fel Användarnamn / Lösenord"}, // 45
-{" ", " ", " "}, // 46
+{"Leave blank if you do not wish to change password!",
+"Jätetään tyhjäksi ellei salasanaa muuteta!",
+"Lämnas tomt ifall lösenoret inte ska bytas"}, // 46
 {" ", " ", " "}, // 47
 {" ", " ", " "}, // 48
 {" ", " ", " "}, // 49

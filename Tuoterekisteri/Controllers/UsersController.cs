@@ -18,7 +18,7 @@ namespace Tuoterekisteri.Controllers
         public ActionResult Index()
         {
 
-            if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
+            if (Session["UserName"] != null && Session["Permission"].ToString() == "1") //Varmistetaan kirjautuminen & oikeudet
             {
                 List<User> model = db.Users.ToList();
                 db.Dispose();
@@ -28,14 +28,13 @@ namespace Tuoterekisteri.Controllers
         }
         public ActionResult Login()
         {
-            if (Session["username"] != null) { return RedirectToAction("Index", "Home"); }
+            if (Session["username"] != null) { return RedirectToAction("Index", "Home"); } //Palautetaan login näkymä jos ei olla kirjauduttu
             else return View();
         }
         [HttpPost]
         public ActionResult Authorize(User LoginModel)
         {
-            string enteredpw = LoginModel.password;
-            var bpassword = System.Text.Encoding.UTF8.GetBytes(enteredpw);
+            var bpassword = System.Text.Encoding.UTF8.GetBytes(LoginModel.password);
             var hash = System.Security.Cryptography.MD5.Create().ComputeHash(bpassword);
             LoginModel.password = Convert.ToBase64String(hash);
             var LoggedUser = db.Users.SingleOrDefault(x => x.username == LoginModel.username && x.password == LoginModel.password);
@@ -85,8 +84,7 @@ namespace Tuoterekisteri.Controllers
             {
                 try
                 {
-                    string enteredpw = newUser.password;
-                    var bpassword = System.Text.Encoding.UTF8.GetBytes(enteredpw);
+                    var bpassword = System.Text.Encoding.UTF8.GetBytes(newUser.password);
                     var hash = System.Security.Cryptography.MD5.Create().ComputeHash(bpassword);
                     newUser.password = Convert.ToBase64String(hash);
                     db.Users.Add(newUser);
@@ -149,6 +147,7 @@ namespace Tuoterekisteri.Controllers
                 //ViewBag.RegionID = new SelectList(db.Region, "RegionID", "RegionDescription", X.RegionID);
                 if (Session["UserName"] != null && Session["Permission"].ToString() == "1")
                 {
+                    user.password = "";
                     return View(user);
                 }
                 else return RedirectToAction("Index");
@@ -158,29 +157,39 @@ namespace Tuoterekisteri.Controllers
                 return RedirectToAction("Index");
             }
             finally { db.Dispose(); }
-
-
         }
         [HttpPost]
         [ValidateAntiForgeryToken] //Katso https://go.microsoft.com/fwlink/?LinkId=317598
-        public ActionResult Edit([Bind(Include = "username, password, email, firstName, lastName, admin, user_id")] User user)
+        public ActionResult Edit([Bind(Include = "username, password, email, firstName, lastName, admin, user_id")] User editee)
         {
             if (ModelState.IsValid && (Session["UserName"] != null))
             {
                 try
                 {
-                    string enteredpw = user.password;
-                    var bpassword = System.Text.Encoding.UTF8.GetBytes(enteredpw);
+                    if (editee.password == null)  // Jos salasana kenttä on jätetty tyhjäksi, salasana pysyy ennallaan.
+                    {
+                        editee.password = db.Users.Find(editee.user_id).password;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else //Muussa tapauksessa syötetty salasana hashataan ennen tiedon talletusta.
+                    { 
+                    var bpassword = System.Text.Encoding.UTF8.GetBytes(editee.password); 
                     var hash = System.Security.Cryptography.MD5.Create().ComputeHash(bpassword);
-                    user.password = Convert.ToBase64String(hash);
-                    db.Entry(user).State = EntityState.Modified;
+                    editee.password = Convert.ToBase64String(hash);
+                    db.Entry(editee).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
+                    }
                 }
                 catch
                 {
                     ViewBag.CreateUserError = T.txt[26, L.nr];
                     return View();
+                }
+                finally
+                {
+                    db.Dispose();
                 }
 
             }
