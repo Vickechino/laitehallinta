@@ -50,17 +50,17 @@ namespace Tuoterekisteri.Controllers
         }
 
         // GET: Loanx/Create
-        public ActionResult Create()
+        public ActionResult Create(int? product_group_id)
         {
             if (Session["UserName"] != null)
             {
-            ViewBag.product_group_id = new SelectList(db.Productgroups, "product_group_id", "product_group_name");
+            ViewBag.product_group_id = new SelectList(db.Productgroups, "product_group_id", "product_group_name");          
+            ViewBag.product_id = new SelectList(db.Products.Where(p => p.product_group_id == product_group_id), "product_id", "product_name");
             ViewBag.location_id = new SelectList(db.Locations, "location_id", "location_name");
-            ViewBag.product_id = new SelectList(db.Products, "product_id", "product_name");
             ViewBag.spec_id = new SelectList(db.Specifications, "spec_id", "loan_spec");
             ViewBag.user_id = new SelectList(db.Users, "user_id", "username");
-            ViewBag.status = new SelectList(db.Loans, "load_id", "status");
-            
+            ViewBag.status = new SelectList(db.Loans, "loan_id", "status");
+                
             return View();
                  
             }

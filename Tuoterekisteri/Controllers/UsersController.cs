@@ -46,6 +46,8 @@ namespace Tuoterekisteri.Controllers
                 Session["UserName"] = LoggedUser.username;
                 Session["Permission"] = LoggedUser.admin;
                 Session["UserID"] = LoggedUser.user_id;
+                Session["firstName"] = LoggedUser.firstName;
+                Session["lastName"] = LoggedUser.lastName;
                 LoggedUser.lastSeen = DateTime.Now;
                 db.Entry(LoggedUser).State = EntityState.Modified;
                 db.SaveChanges();
@@ -57,7 +59,7 @@ namespace Tuoterekisteri.Controllers
             {
                 ViewBag.LoginMessage = "Login unsuccessfull";
                 ViewBag.Loggedstatus = "Out";
-                LoginModel.LoginErrorMessage = "Väärä käyttäjätunnus/salasana";
+                LoginModel.LoginErrorMessage = T.txt[45, L.nr];
                 return View("Login", LoginModel);
             }
         }

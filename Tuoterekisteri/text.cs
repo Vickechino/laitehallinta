@@ -51,7 +51,7 @@ public static string[,] txt =
 {"Error. Username taken?",
 "Virhe. Käyttäjanimi varattu?",
 "Fel. Användarnamnet upptaget?"}, // 26
-{"Error. User does not exist?",
+{"Error. User does not sexist?",
 "Virhe. Käyttäjä ei ole olemassa?",
 "Fel. Användaren finns inte?"}, // 27
 {"Lastseen", "Nähty", "Setts till"}, // 28
