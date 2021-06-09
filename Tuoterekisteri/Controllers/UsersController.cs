@@ -80,6 +80,12 @@ namespace Tuoterekisteri.Controllers
         {
             if (ModelState.IsValid && Session["UserName"] != null && Session["Permission"].ToString() == "1")
             {
+                var userNameAlreadyExists = db.Users.Any(x => x.username == newUser.username); //Katsotaan löytyykö samalla nimellä käyttäjää
+                if (userNameAlreadyExists)
+                {
+                    ViewBag.CreateUserError = T.txt[26, L.nr];
+                    return View();
+                }
                 try
                 {
                     var bpassword = System.Text.Encoding.UTF8.GetBytes(newUser.password);
@@ -98,6 +104,7 @@ namespace Tuoterekisteri.Controllers
             }
             return View(User);
         }
+
         public ActionResult Delete(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -162,7 +169,15 @@ namespace Tuoterekisteri.Controllers
         {
             if (ModelState.IsValid && (Session["UserName"] != null))
             {
-                try
+                var userNameAlreadyExists = db.Users.Any(x => x.username == editee.username); //Katsotaan löytyykö samalla nimellä käyttäjää
+                User findUserWithName = (User)db.Users.Where(db => db.username.Equals(editee.username));
+                if (userNameAlreadyExists && findUserWithName.user_id != editee.user_id)
+                {
+                    ViewBag.CreateUserError = T.txt[26, L.nr];
+                    return View();
+                }
+                else {
+                    try
                 {
                     if (editee.password == null)  // Jos salasana kenttä on jätetty tyhjäksi, salasana pysyy ennallaan.
                     {
@@ -188,6 +203,7 @@ namespace Tuoterekisteri.Controllers
                 finally
                 {
                     db.Dispose();
+                }
                 }
 
             }
