@@ -21,7 +21,7 @@ namespace Tuoterekisteri.Controllers
             if (Session["Permission"] != null && Session["Permission"].ToString() == "1")
             {
 
-                var products = db.Products.Include(p => p.Productgroup);
+            var products = db.Products.Include(p => p.Productgroup);
             return View(products.ToList());
 
 
