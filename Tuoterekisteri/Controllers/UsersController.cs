@@ -44,9 +44,9 @@ namespace Tuoterekisteri.Controllers
                 ViewBag.Loggedstatus = "In";
                 Session["UserName"] = LoggedUser.username;
                 Session["Permission"] = LoggedUser.admin;
-                Session["UserID"] = LoggedUser.user_id;
-                Session["firstName"] = LoggedUser.firstName;
-                Session["lastName"] = LoggedUser.lastName;
+                Session["UserID"] = LoggedUser.user_id;  //Do we need this?
+                Session["firstName"] = LoggedUser.firstName; //Do we need this?
+                Session["lastName"] = LoggedUser.lastName; //Do we need this?
                 LoggedUser.lastSeen = DateTime.Now;
                 db.Entry(LoggedUser).State = EntityState.Modified;
                 db.SaveChanges();
@@ -167,35 +167,32 @@ namespace Tuoterekisteri.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken] //Katso https://go.microsoft.com/fwlink/?LinkId=317598
-        public ActionResult Edit([Bind(Include = "username, password, email, firstName, lastName, admin, user_id")] User editee)
+        public ActionResult Edit([Bind(Include = "username, password, email, firstName, lastName, admin, user_id, lastSeen")] User editee)
         {
             if (ModelState.IsValid && (Session["UserName"] != null))
             {
                 var userNameAlreadyExists = db.Users.Any(x => x.username == editee.username); //Katsotaan löytyykö samalla nimellä käyttäjää
-                User findUserWithName = (User)db.Users.Where(db => db.username.Equals(editee.username));
-                if (userNameAlreadyExists && findUserWithName.user_id != editee.user_id)
+                if (userNameAlreadyExists && db.Users.Find(editee.user_id).username != editee.username)
                 {
                     ViewBag.CreateUserError = T.txt[26, L.nr];
                     return View();
                 }
-                else {
                     try
                 {
-                    if (editee.password == null)  // Jos salasana kenttä on jätetty tyhjäksi, salasana pysyy ennallaan.
+                    if (editee.password == null)  
                     {
-                        editee.password = db.Users.Find(editee.user_id).password;
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
+                        editee.password = db.Users.Find(editee.user_id).password; //Salasana kenttä on tyhjä, haetaan nykyinen tietokannasta, eikä hashata.
                     }
-                    else //Muussa tapauksessa syötetty salasana hashataan ennen tiedon talletusta.
-                    { 
-                    var bpassword = System.Text.Encoding.UTF8.GetBytes(editee.password); 
-                    var hash = System.Security.Cryptography.MD5.Create().ComputeHash(bpassword);
-                    editee.password = Convert.ToBase64String(hash);
-                    db.Entry(editee).State = EntityState.Modified;
+                    else 
+                    {
+                        var bpassword = System.Text.Encoding.UTF8.GetBytes(editee.password);
+                        var hash = System.Security.Cryptography.MD5.Create().ComputeHash(bpassword);
+                        editee.password = Convert.ToBase64String(hash); //Muussa tapauksessa syötetty salasana hashataan ennen tiedon talletusta.
+                    }
+                    var existingEntity = db.Users.Find(editee.user_id);
+                    db.Entry(existingEntity).CurrentValues.SetValues(editee);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
-                    }
+                        return RedirectToAction("Index");
                 }
                 catch
                 {
@@ -205,7 +202,6 @@ namespace Tuoterekisteri.Controllers
                 finally
                 {
                     db.Dispose();
-                }
                 }
 
             }
