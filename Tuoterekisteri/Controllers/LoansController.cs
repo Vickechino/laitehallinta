@@ -19,7 +19,7 @@ namespace Tuoterekisteri.Controllers
                 try
                 {
                     List<Loan> model = db.Loans.ToList();
-                    db.Dispose();
+                   
                     return View(model);
                 }
                 catch (Exception)
@@ -27,7 +27,7 @@ namespace Tuoterekisteri.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                     throw;
                 }
-                finally { db.Dispose(); }
+                finally {  }
             }
             else return RedirectToAction("login", "Users");
         }

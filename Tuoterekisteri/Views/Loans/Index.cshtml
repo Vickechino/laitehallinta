@@ -14,9 +14,7 @@
     <title>@T.txt[16, L.nr]</title>
 </head>
 <body>
-    <p>
-        @Html.ActionLink(T.txt[17, L.nr], "Create")
-    </p>
+   
 
     <table class="table">
         <tr>
@@ -37,7 +35,7 @@
                 @T.txt[29, L.nr]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.status)
+                @T.txt[39, L.nr]
             </th>
             <th></th>
         </tr>
@@ -45,33 +43,38 @@
 
         @foreach (var item in Model)
         {
-            <tr>
+    <tr>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.user_id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.location_id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.product_id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.loaned_date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.spec_id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.status)
-                </td>
-                <td>
-                    @Html.ActionLink(T.txt[11, L.nr], "Edit", new { id = item.loan_id }) |
-                    @Html.ActionLink(T.txt[18, L.nr], "Details", new { id = item.loan_id }) |
-                    @Html.ActionLink(T.txt[10, L.nr], "Delete", new { id = item.loan_id })
+        <td>
+            @Html.DisplayFor(modelItem => item.User.username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location.location_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.product_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.loaned_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Specification.loan_spec)
+        </td>
+        @if (item.status == 1)
+        {
+        <td>@T.txt[39, L.nr]</td>
+        }
+        else
+        {
+            <td>-</td>
+        }
+        <td>
 
-                </td>
-            </tr>
+            @Html.ActionLink(T.txt[18, L.nr], "Details", new { id = item.loan_id }) |
+            @Html.ActionLink(T.txt[10, L.nr], "Delete", new { id = item.loan_id })
+
+        </td>
+    </tr>
         }
 
     </table>

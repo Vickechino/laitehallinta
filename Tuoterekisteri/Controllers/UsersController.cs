@@ -44,9 +44,9 @@ namespace Tuoterekisteri.Controllers
                 ViewBag.Loggedstatus = "In";
                 Session["UserName"] = LoggedUser.username;
                 Session["Permission"] = LoggedUser.admin;
-                Session["UserID"] = LoggedUser.user_id;  //Do we need this?
-                Session["firstName"] = LoggedUser.firstName; //Do we need this?
-                Session["lastName"] = LoggedUser.lastName; //Do we need this?
+                Session["UserID"] = LoggedUser.user_id;  //Do we need this? Better keep
+                Session["firstName"] = LoggedUser.firstName; //Do we need this? Yes, In Loanx
+                Session["lastName"] = LoggedUser.lastName; //Do we need this? Yes, In Loanx
                 LoggedUser.lastSeen = DateTime.Now;
                 db.Entry(LoggedUser).State = EntityState.Modified;
                 db.SaveChanges();
