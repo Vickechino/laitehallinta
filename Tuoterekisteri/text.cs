@@ -77,7 +77,7 @@ public static string[,] txt =
 "Fel Användarnamn / Lösenord"}, // 45
 {"Leave blank if you do not wish to change password!",
 "Jätetään tyhjäksi ellei salasanaa muuteta!",
-"Lämnas tomt ifall lösenoret inte ska bytas"}, // 46
+"Lämnas tomt ifall lösenoret inte ska bytas!"}, // 46
 {" ", " ", " "}, // 47
 {" ", " ", " "}, // 48
 {" ", " ", " "}, // 49

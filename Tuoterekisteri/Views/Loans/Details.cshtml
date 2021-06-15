@@ -16,66 +16,64 @@
         <h4>@T.txt[40, L.nr]</h4>
         <hr />
         <dl class="dl-horizontal">
+
+
             <dt>
-                @Html.DisplayNameFor(model => model.loan_id)
+                @(T.txt[2,L.nr])
             </dt>
-    
+
             <dd>
-                @Html.DisplayFor(model => model.loan_id)
+                @Html.DisplayFor(model => model.User.username)
             </dd>
-    
+
             <dt>
-                @Html.DisplayNameFor(model => model.user_id)
+                @(T.txt[14,L.nr])
             </dt>
-    
+
             <dd>
-                @Html.DisplayFor(model => model.user_id)
+                @Html.DisplayFor(model => model.Location.location_name)
             </dd>
-    
+
             <dt>
-                @Html.DisplayNameFor(model => model.location_id)
+                @(T.txt[31,L.nr])
             </dt>
-    
+
             <dd>
-                @Html.DisplayFor(model => model.location_id)
+                @Html.DisplayFor(model => model.Product.product_name)
             </dd>
-    
+
             <dt>
-                @Html.DisplayNameFor(model => model.product_id)
+                @(T.txt[39,L.nr])
             </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.product_id)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.loaned_date)
-            </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.loaned_date)
             </dd>
-    
+
             <dt>
-                @Html.DisplayNameFor(model => model.spec_id)
+                @(T.txt[29,L.nr])
             </dt>
-    
+
             <dd>
-                @Html.DisplayFor(model => model.spec_id)
+                @Html.DisplayFor(model => model.Specification.loan_spec)
             </dd>
-    
+
             <dt>
-                @Html.DisplayNameFor(model => model.status)
+                @T.txt[39, L.nr]
             </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.status)
-            </dd>
-    
+
+            @if (Model.status == 1)
+            {
+                <dd>@T.txt[39, L.nr]</dd>
+            }
+            else
+            {
+                <dd>-</dd>
+            }
         </dl>
     </div>
     <p>
-        @Html.ActionLink(T.txt[11, L.nr], "Edit", new { /* id = Model.PrimaryKey */ }) |
+       
         @Html.ActionLink(T.txt[15, L.nr], "Index")
     </p>
 </body>
