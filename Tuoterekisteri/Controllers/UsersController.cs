@@ -32,7 +32,7 @@ namespace Tuoterekisteri.Controllers
             else return View();
         }
         [HttpPost]
-        public ActionResult Authorize([Bind(Include ="username, password")]User LoginModel) //Need try/catch //Käyttäjän sisäänkirjautuminen 
+        public ActionResult Authorize([Bind(Include ="username, password")]User LoginModel) //Käyttäjän sisäänkirjautuminen 
         {
             try
             {
@@ -196,8 +196,8 @@ namespace Tuoterekisteri.Controllers
                     else 
                     {
                         var bpassword = System.Text.Encoding.UTF8.GetBytes(editee.password);
-                        var hash = System.Security.Cryptography.MD5.Create().ComputeHash(bpassword);
-                        editee.password = Convert.ToBase64String(hash); //Muussa tapauksessa syötetty salasana hashataan ennen tiedon talletusta.
+                        var hash = System.Security.Cryptography.MD5.Create().ComputeHash(bpassword); //Muussa tapauksessa syötetty salasana hashataan ennen tiedon talletusta.
+                        editee.password = Convert.ToBase64String(hash); 
                     }
                     var existingEntity = db.Users.Find(editee.user_id);
                     db.Entry(existingEntity).CurrentValues.SetValues(editee);
