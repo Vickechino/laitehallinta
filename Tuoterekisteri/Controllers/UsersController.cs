@@ -32,7 +32,7 @@ namespace Tuoterekisteri.Controllers
             else return View();
         }
         [HttpPost]
-        public ActionResult Authorize(User LoginModel)
+        public ActionResult Authorize(User LoginModel) //Need try/catch
         {
             var bpassword = System.Text.Encoding.UTF8.GetBytes(LoginModel.password);
             var hash = System.Security.Cryptography.MD5.Create().ComputeHash(bpassword);

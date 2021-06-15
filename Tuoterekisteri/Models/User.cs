@@ -28,7 +28,7 @@ namespace Tuoterekisteri.Models
         public string username { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Loan> Loans { get; set; }
         public string LoginErrorMessage { get; internal set; }
