@@ -15,7 +15,7 @@ namespace Tuoterekisteri.Controllers
     {
         LaitehallintaEntities db = new LaitehallintaEntities();
         // GET: Users
-        public ActionResult Index()
+        public ActionResult Index() //Käyttäjälistan palautus
         {
 
             if (Session["UserName"] != null && Session["Permission"].ToString() == "1") //Varmistetaan kirjautuminen & oikeudet
@@ -26,49 +26,58 @@ namespace Tuoterekisteri.Controllers
             }
             else return RedirectToAction("login", "Users");
         }
-        public ActionResult Login()
+        public ActionResult Login() //Login näkymän palautus
         {
             if (Session["username"] != null) { return RedirectToAction("Index", "Home"); } //Palautetaan login näkymä jos ei olla kirjauduttu
             else return View();
         }
         [HttpPost]
-        public ActionResult Authorize(User LoginModel) //Need try/catch
+        public ActionResult Authorize([Bind(Include ="username, password")]User LoginModel) //Need try/catch //Käyttäjän sisäänkirjautuminen 
         {
+            try
+            {
+
+
+            if (LoginModel.username == null)
+            {
+                LoginModel.LoginErrorMessage = T.txt[45, L.nr];
+                return View("Login", LoginModel);
+            }
             var bpassword = System.Text.Encoding.UTF8.GetBytes(LoginModel.password);
             var hash = System.Security.Cryptography.MD5.Create().ComputeHash(bpassword);
             LoginModel.password = Convert.ToBase64String(hash);
             var LoggedUser = db.Users.SingleOrDefault(x => x.username == LoginModel.username && x.password == LoginModel.password);
             if (LoggedUser != null)
             {
-                ViewBag.LoginMessage = "Successful login";
-                ViewBag.Loggedstatus = "In";
                 Session["UserName"] = LoggedUser.username;
                 Session["Permission"] = LoggedUser.admin;
-                Session["UserID"] = LoggedUser.user_id;  //Do we need this? Better keep
-                Session["firstName"] = LoggedUser.firstName; //Do we need this? Yes, In Loanx
-                Session["lastName"] = LoggedUser.lastName; //Do we need this? Yes, In Loanx
+                Session["UserID"] = LoggedUser.user_id;  
+                Session["firstName"] = LoggedUser.firstName;
+                Session["lastName"] = LoggedUser.lastName; 
                 LoggedUser.lastSeen = DateTime.Now;
                 db.Entry(LoggedUser).State = EntityState.Modified;
                 db.SaveChanges();
-
-
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                ViewBag.LoginMessage = "Login unsuccessfull";
-                ViewBag.Loggedstatus = "Out";
+                LoginModel.LoginErrorMessage = T.txt[45, L.nr];
+                return View("Login", LoginModel);
+                }
+            }
+            catch
+            {
                 LoginModel.LoginErrorMessage = T.txt[45, L.nr];
                 return View("Login", LoginModel);
             }
         }
-        public ActionResult LogOut()
+        public ActionResult LogOut() //Käyttäjän uloskirjautuminen
         {
             Session.Abandon();
             ViewBag.LoggedStatus = "Out";
             return RedirectToAction("Index", "Home");
         }
-        public ActionResult Create()
+        public ActionResult Create() //käyttäjän Luonti näkymän palatus
         {
             if (Session["UserName"] != null && Session["Permission"].ToString() == "1")
             {
@@ -77,7 +86,7 @@ namespace Tuoterekisteri.Controllers
             else return RedirectToAction("Index", "Home");
         }
 
-        [HttpPost]
+        [HttpPost]  //Käyttäjän luominen
         public ActionResult Create([Bind(Include = "username, password, email, firstName, lastName, admin")] User newUser)
         {
             if (ModelState.IsValid && Session["UserName"] != null && Session["Permission"].ToString() == "1")
@@ -85,7 +94,7 @@ namespace Tuoterekisteri.Controllers
                 var userNameAlreadyExists = db.Users.Any(x => x.username == newUser.username); //Katsotaan löytyykö samalla nimellä käyttäjää
                 if (userNameAlreadyExists)
                 {
-                    ViewBag.CreateUserError = T.txt[26, L.nr];
+                    ViewBag.CreateUserError = T.txt[47, L.nr];
                     return View();
                 }
                 try
@@ -105,9 +114,10 @@ namespace Tuoterekisteri.Controllers
 
             }
             return View(User);
+
         }
 
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? id) //Käyttäjän poistonäkymän palautus
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             User user = db.Users.Find(id);
@@ -119,7 +129,7 @@ namespace Tuoterekisteri.Controllers
             else return RedirectToAction("Index");
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Delete")] //Käyttäjän poisto
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -143,7 +153,7 @@ namespace Tuoterekisteri.Controllers
             }
             else return RedirectToAction("Index");
         }
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id) //Käyttäjän muokkausnäkymän palautus
         {
             if (id == null) { return RedirectToAction("Index"); }
             try
@@ -165,7 +175,7 @@ namespace Tuoterekisteri.Controllers
             }
             finally { db.Dispose(); }
         }
-        [HttpPost]
+        [HttpPost] //Käyttäjän muokkaus
         [ValidateAntiForgeryToken] //Katso https://go.microsoft.com/fwlink/?LinkId=317598
         public ActionResult Edit([Bind(Include = "username, password, email, firstName, lastName, admin, user_id, lastSeen")] User editee)
         {

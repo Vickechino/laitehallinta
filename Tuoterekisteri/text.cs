@@ -48,9 +48,9 @@ public static string[,] txt =
 "1 jos admin, muuten jätetään tyhjäksi",
 "1 för admin, annars lämna tomt"}, // 24
 {"Save", "Talenna", "Spara"}, // 25
-{"Error. Username taken?",
-"Virhe. Käyttäjanimi varattu?",
-"Fel. Användarnamnet upptaget?"}, // 26
+{"Invalid username/password",
+"Virheellinen käyttäjänimi/salasana",
+"Felaktigt användarnamn/lösenord"}, // 26
 {"Error. User does not sexist?",
 "Virhe. Käyttäjä ei ole olemassa?",
 "Fel. Användaren finns inte?"}, // 27
@@ -78,7 +78,7 @@ public static string[,] txt =
 {"Leave blank if you do not wish to change password!",
 "Jätetään tyhjäksi ellei salasanaa muuteta!",
 "Lämnas tomt ifall lösenoret inte ska bytas!"}, // 46
-{" ", " ", " "}, // 47
+{"Username taken!", "Käyttäjänimi varattu!", "Användarnamnet är reserverat!"}, // 47
 {" ", " ", " "}, // 48
 {" ", " ", " "}, // 49
 {" ", " ", " "}, // 50
