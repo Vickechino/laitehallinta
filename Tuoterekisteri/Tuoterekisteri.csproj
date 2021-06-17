@@ -274,10 +274,9 @@
     <Content Include="Views\Loans\Delete.cshtml" />
     <Content Include="Views\Loans\Details.cshtml" />
     <Content Include="Views\Loanx\Create.cshtml" />
-    <Content Include="Views\Loanx\Delete.cshtml" />
-    <Content Include="Views\Loanx\Details.cshtml" />
-    <Content Include="Views\Loanx\Edit.cshtml" />
-    <Content Include="Views\Loanx\Index.cshtml" />
+    <Content Include="Views\Loanx\Loaned.cshtml" />
+    <Content Include="Views\Loanx\Return.cshtml" />
+    <Content Include="Views\Loanx\Returned.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

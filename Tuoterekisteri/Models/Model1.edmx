@@ -24,7 +24,7 @@
           <Property Name="location_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="location_name" Type="nvarchar" MaxLength="100" />
           <Property Name="location_row2" Type="nvarchar" MaxLength="100" />
-          <Property Name="location_returnable" Type="nchar" MaxLength="1" />
+         
         </EntityType>
         <EntityType Name="Productgroup">
           <Key>

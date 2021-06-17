@@ -78,10 +78,17 @@ public static string[,] txt =
 {"Leave blank if you do not wish to change password!",
 "Jätetään tyhjäksi ellei salasanaa muuteta!",
 "Lämnas tomt ifall lösenoret inte ska bytas!"}, // 46
-{"Username taken!", "Käyttäjänimi varattu!", "Användarnamnet är reserverat!"}, // 47
-{" ", " ", " "}, // 48
-{" ", " ", " "}, // 49
+{"Username taken!", "Käyttäjänimi varattu!",
+"Användarnamnet är reserverat!"}, // 47
+{"The loan is registered!", "Laina on rekisteröity!",
+"Lånet är registrerat!"}, // 48
+{"The loan is returned", "Laina on palautettu",
+"Lånet är returnerat"}, // 49
 {" ", " ", " "}, // 50
+{" ", " ", " "}, // 51
+{" ", " ", " "}, // 52
+{" ", " ", " "}, // 53
+{" ", " ", " "}, // 54
 
 };
 }
