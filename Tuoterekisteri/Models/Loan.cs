@@ -20,7 +20,8 @@ namespace Tuoterekisteri.Models
         public Nullable<int> product_id { get; set; }
         public Nullable<System.DateTime> loaned_date { get; set; }
         public Nullable<int> spec_id { get; set; }
-        public int status { get; set; }
+        public Nullable<int> status { get; set; }
+        public Nullable<System.DateTime> returned_date { get; set; }
     
         public virtual Location Location { get; set; }
         public virtual Product Product { get; set; }
