@@ -37,20 +37,44 @@ namespace Tuoterekisteri.Controllers
         }
 
        
-        // GET: Loanx/Create
+        
+               // GET: Loanx/Create
         public ActionResult Create(int? product_group_id)
         {
             if (Session["UserName"] != null)
             {
-            ViewBag.product_group_id = new SelectList(db.Productgroups, "product_group_id", "product_group_name");          
-            ViewBag.product_id = new SelectList(db.Products, "product_id", "product_name");
+
+                //Query from Loans -table
+                var loanQuery = (from l in db.Loans
+                             where l.status == 1
+                             select l).ToList();
+
+            //Query all products
+            var productsQuery = (from p in db.Products
+                                 select p).ToList();
+
+            //Comparing two lists and excluding all the loaned items into variable
+            var notLoanedList = productsQuery.Where(s => !loanQuery.Any(p => p.product_id == s.product_id)).ToList();
+
+            //If group has not been selected
+            if (product_group_id == null)
+            {
+                ViewBag.product_id = new SelectList(notLoanedList, "product_id", "product_name");
+            }
+            //Else we filter selected group from the variable
+            else
+            {
+                ViewBag.product_id = new SelectList(notLoanedList.Where(x => x.product_group_id == product_group_id), "product_id", "product_name");
+            }
+
+            ViewBag.product_group_id = new SelectList(db.Productgroups, "product_group_id", "product_group_name");
             ViewBag.location_id = new SelectList(db.Locations, "location_id", "location_name");
             ViewBag.spec_id = new SelectList(db.Specifications, "spec_id", "loan_spec");
             ViewBag.user_id = new SelectList(db.Users, "user_id", "username");
             ViewBag.status = new SelectList(db.Loans, "loan_id", "status");
                 
             return View();
-                 
+
             }
             else return RedirectToAction("Index", "Home");
         }
@@ -75,9 +99,9 @@ namespace Tuoterekisteri.Controllers
             ViewBag.status = new SelectList(db.Loans, "loan_id", "status");
 
             return View(loan);
-            }
-            else return RedirectToAction("Index", "Home");
         }
+            else return RedirectToAction("Index", "Home");
+    }
 
 
 
