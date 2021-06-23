@@ -14,7 +14,7 @@
             var selValue = $("#singleSelectedProduct_group_id").val();
             document.getElementById("Productgroup").value = selValue;
             alert(selValue);
-            var url = "/Loanx/Create/?product_group_id=" + selValue;
+            var url = "/Loanx/Create/?Product_group_id=" + selValue;
             console.log(url);
             $.get(url, function (data) {
             });

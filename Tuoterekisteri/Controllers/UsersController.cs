@@ -184,38 +184,37 @@ namespace Tuoterekisteri.Controllers
                 var userNameAlreadyExists = db.Users.Any(x => x.username == editee.username); //Katsotaan löytyykö samalla nimellä käyttäjää
                 if (userNameAlreadyExists && db.Users.Find(editee.user_id).username != editee.username)
                 {
-                    ViewBag.CreateUserError = T.txt[26, L.nr];
-                    return View();
+                ViewBag.CreateUserError = T.txt[26, L.nr];
+                return View();
                 }
-                    try
+                try
                 {
-                    if (editee.password == null)  
+                if (editee.password == null)  
+                {
+                editee.password = db.Users.Find(editee.user_id).password; //Salasana kenttä on tyhjä, haetaan nykyinen tietokannasta, eikä hashata.
+                }
+                else 
                     {
-                        editee.password = db.Users.Find(editee.user_id).password; //Salasana kenttä on tyhjä, haetaan nykyinen tietokannasta, eikä hashata.
-                    }
-                    else 
-                    {
-                        var bpassword = System.Text.Encoding.UTF8.GetBytes(editee.password);
-                        var hash = System.Security.Cryptography.MD5.Create().ComputeHash(bpassword); //Muussa tapauksessa syötetty salasana hashataan ennen tiedon talletusta.
-                        editee.password = Convert.ToBase64String(hash); 
+                    var bpassword = System.Text.Encoding.UTF8.GetBytes(editee.password);
+                    var hash = System.Security.Cryptography.MD5.Create().ComputeHash(bpassword); //Muussa tapauksessa syötetty salasana hashataan ennen tiedon talletusta.
+                    editee.password = Convert.ToBase64String(hash); 
                     }
                     var existingEntity = db.Users.Find(editee.user_id);
                     db.Entry(existingEntity).CurrentValues.SetValues(editee);
                     db.SaveChanges();
-                        return RedirectToAction("Index");
-                }
-                catch
-                {
+                    return RedirectToAction("Index");
+                    }
+                    catch
+                    {
                     ViewBag.CreateUserError = T.txt[26, L.nr];
                     return View();
-                }
-                finally
-                {
+                    }
+                    finally
+                    {
                     db.Dispose();
-                }
-
-            }
-            return View(User);
+                    }
+                    }
+             return View(User);
         }
     }
 }
