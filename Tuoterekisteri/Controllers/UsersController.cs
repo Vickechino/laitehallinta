@@ -91,7 +91,7 @@ namespace Tuoterekisteri.Controllers
         {
             if (ModelState.IsValid && Session["UserName"] != null && Session["Permission"].ToString() == "1")
             {
-                var userNameAlreadyExists = db.Users.Any(x => x.username == newUser.username); //Katsotaan löytyykö samalla nimellä käyttäjää
+                var userNameAlreadyExists = db.Users.Any(x => x.username == newUser.username); //Katsotaan löytyykö samalla nimellä käyttäjää & set boolean
                 if (userNameAlreadyExists)
                 {
                     ViewBag.CreateUserError = T.txt[47, L.nr];
@@ -184,7 +184,7 @@ namespace Tuoterekisteri.Controllers
                 var userNameAlreadyExists = db.Users.Any(x => x.username == editee.username); //Katsotaan löytyykö samalla nimellä käyttäjää
                 if (userNameAlreadyExists && db.Users.Find(editee.user_id).username != editee.username)
                 {
-                ViewBag.CreateUserError = T.txt[26, L.nr];
+                ViewBag.CreateUserError = T.txt[47, L.nr];
                 return View();
                 }
                 try
