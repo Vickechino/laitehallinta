@@ -91,7 +91,7 @@ namespace Tuoterekisteri.Controllers
         {
             if (ModelState.IsValid && Session["UserName"] != null && Session["Permission"].ToString() == "1")
             {
-                var userNameAlreadyExists = db.Users.Any(x => x.username == newUser.username); //Katsotaan löytyykö samalla nimellä käyttäjää & set boolean
+                var userNameAlreadyExists = db.Users.Any(x => x.username == newUser.username); //Katsotaan löytyykö samalla nimellä käyttäjää
                 if (userNameAlreadyExists)
                 {
                     ViewBag.CreateUserError = T.txt[47, L.nr];

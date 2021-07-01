@@ -84,7 +84,7 @@ public static string[,] txt =
 "Lånet är registrerat!"}, // 48
 {"The loan is returned", "Laina on palautettu",
 "Lånet är returnerat"}, // 49
-{" ", " ", " "}, // 50
+{"-- ALL --", "-- KAIKKI --", "-- ALLA --"}, // 50
 {" ", " ", " "}, // 51
 {" ", " ", " "}, // 52
 {" ", " ", " "}, // 53

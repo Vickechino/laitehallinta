@@ -103,26 +103,35 @@ namespace Tuoterekisteri.Controllers
             else return RedirectToAction("Index", "Home");
     }
 
-
-
-
         // GET: Loanx/Return
         public ActionResult Return(int? product_group_id)
         {
             if (Session["UserName"] != null)
             {
+                int user = (int)Session["UserID"];
+                
+                //Query from Loans -table
+                var loanQuery = (from l in db.Loans
+                                 where (l.status == 1 ) && (l.user_id == user)
+                                 select l).ToList();
+
+                //Query all products
+                var productsQuery = (from p in db.Products
+                                     select p).ToList();
+
+                //Comparing two lists and excluding all the loaned items into variable
+                var LoanedList = productsQuery.Where(s => loanQuery.Any(p => p.product_id == s.product_id)).ToList();
+
+                ViewBag.product_id = new SelectList(LoanedList, "product_id", "product_name");
+
                 ViewBag.product_group_id = new SelectList(db.Productgroups, "product_group_id", "product_group_name");
-                ViewBag.product_id = new SelectList(db.Products, "product_id", "product_name");
                 ViewBag.location_id = new SelectList(db.Locations, "location_id", "location_name");
                 ViewBag.spec_id = new SelectList(db.Specifications, "spec_id", "loan_spec");
                 ViewBag.user_id = new SelectList(db.Users, "user_id", "username");
                 ViewBag.status = new SelectList(db.Loans, "loan_id", "status");
-
                 return View();
-
             }
             else return RedirectToAction("Index", "Home");
-
         }
 
         // POST: Loanx/Return
@@ -148,7 +157,7 @@ namespace Tuoterekisteri.Controllers
                 ViewBag.location_id = new SelectList(db.Locations, "location_id", "location_name", loan.location_id);
                 ViewBag.spec_id = new SelectList(db.Specifications, "spec_id", "loan_spec", loan.spec_id);
                 ViewBag.user_id = new SelectList(db.Users, "user_id", "username", loan.user_id);
-                ViewBag.status = new SelectList(db.Loans, "load_id", "status");
+                ViewBag.status = new SelectList(db.Loans, "loan_id", "status");
 
                 return View(loan);
 
