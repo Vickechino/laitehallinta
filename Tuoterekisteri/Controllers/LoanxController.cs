@@ -146,7 +146,10 @@ namespace Tuoterekisteri.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    db.Loans.Add(loan);
+                    Loan theLoan = db.Loans.Where(l => l.product_id == loan.product_id && l.status == 1).FirstOrDefault();
+                    theLoan.returned_date = DateTime.Now;
+                    theLoan.status = 2;
+                    db.Entry(theLoan).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Returned");
                 }

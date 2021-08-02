@@ -62,7 +62,11 @@
         </td>
         @if (item.status == 1)
         {
-        <td>@T.txt[39, L.nr]</td>
+            <td>@T.txt[39, L.nr]</td>
+        }
+        else if (item.status == 2)
+        {
+            <td>@T.txt[49, L.nr]</td>
         }
         else
         {
